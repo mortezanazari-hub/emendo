@@ -1,4 +1,5 @@
 import 'package:emendo/core/utility/const/app_colors.dart';
+import 'package:emendo/core/utility/functions/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -9,42 +10,116 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final GlobalKey _redKey = GlobalKey();
+  double redHeight = 0;
+
+  void updateRedHeight() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final renderBox =
+          _redKey.currentContext?.findRenderObject() as RenderBox?;
+      if (renderBox != null && renderBox.size.height != redHeight) {
+        setState(() {
+          redHeight = renderBox.size.height;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: SafeArea(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Image.asset(
-                      "lib/core/resources/images/png/splash_screen_start.png"),
+          child: Center(
+            child: Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.bottomCenter,
+              children: [
+                ///bg and logo stack
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      key: _redKey,
+                      child: Image.asset(
+                        "lib/core/resources/images/png/splash_screen_start.png",
+                        frameBuilder:
+                            (context, child, frame, wasSynchronouslyLoaded) {
+                          if (frame != null || wasSynchronouslyLoaded) {
+                            updateRedHeight();
+                          }
+                          return child;
+                        },
+                      ),
+                    ),
+                    Positioned(
+                      top: 20,
+                      left: 20,
+                      child: Image.asset(
+                        "lib/core/resources/images/png/mini_logo.png",
+                        height: 30,
+                      ),
+                    ),
+                  ],
+                ),
+
+                if (redHeight > 0)
                   Positioned(
-                    top: 20,
-                    left: 20,
-                    child: Image.asset(
-                      "lib/core/resources/images/png/mini_logo.png",
-                      height: 30,
+                    top: redHeight - 50,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 500,
+                      decoration: BoxDecoration(
+                        color: AppColors.color0,
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(30),
+                          bottom: Radius.circular(0),
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 30),
+
+                          ///logotype
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Emen",
+                                style: AppTextStyles.logoBase(),
+                              ),
+                              Text(
+                                " Do",
+                                style: AppTextStyles.logoBase(
+                                    color: AppColors.color4),
+                              ),
+                            ],
+                          ),
+
+                          Text(
+                            "Building Better \nWorkplaces ",
+                            style: AppTextStyles.base(
+                                color: AppColors.color7,
+                                fontSize: 34,
+                                fontWeight: FontWeight.w600),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            "Create a unique emotional story that\ndescribes better than words ",
+                            style: AppTextStyles.base(
+                              fontSize: 13,
+                              color: AppColors.color2,
+                              fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: double.infinity,
-                      height: 300,
-                      decoration: BoxDecoration(
-                          color: AppColors.color0,
-                          borderRadius: BorderRadius.vertical(
-                            bottom: Radius.circular(0),
-                            top: Radius.circular(30),
-                          )),
-                    ),
-                  )
-                ],
-              )
-            ],
+              ],
+            ),
           ),
         ),
       ),
