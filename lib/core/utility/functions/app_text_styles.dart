@@ -1,4 +1,3 @@
-// یک کلاس برای مدیریت تمام استایل‌های متنی شما
 import 'package:emendo/core/utility/const/app_colors.dart';
 import 'package:flutter/material.dart';
 
