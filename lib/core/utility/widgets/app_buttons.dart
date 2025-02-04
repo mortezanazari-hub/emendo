@@ -1,3 +1,125 @@
-class AppButtons {
+import 'package:flutter/material.dart';
 
+class AppBaseButton extends StatelessWidget {
+  /// The text displayed on the button.
+  final String text;
+
+  /// The callback function when the button is pressed.
+  final VoidCallback? onPressed;
+
+  /// The callback function when the button is long pressed.
+  final VoidCallback? onLongPress;
+
+  /// Focus node for handling focus.
+  final FocusNode? focusNode;
+
+  /// Whether this button should focus itself if nothing else is already focused.
+  final bool autofocus;
+
+  /// How to clip the content (for images, etc.).
+  final Clip clipBehavior;
+
+  // --- styleFrom parameters with default values (Flutter 2.5+ / 3.x) ---
+  final Color foregroundColor; // text/icon color
+  final Color disabledForegroundColor; // text/icon color when disabled
+  final Color backgroundColor; // background color
+  final Color disabledBackgroundColor; // background color when disabled
+  final Color shadowColor; // shadow color
+  final double elevation; // button elevation
+  final TextStyle textStyle; // text style
+  final EdgeInsetsGeometry padding; // button padding
+  final Size minimumSize; // minimum size
+  final BorderSide side; // border side
+  final OutlinedBorder shape; // shape of the button
+  final MouseCursor? enabledMouseCursor; // cursor when enabled
+  final MouseCursor? disabledMouseCursor; // cursor when disabled
+  final VisualDensity visualDensity; // adjusts how compact the button is
+  final MaterialTapTargetSize
+      tapTargetSize; // configures the minimum tap target size
+  final Duration animationDuration; // duration of animations
+  final bool
+      enableFeedback; // whether detected gestures should provide feedback
+  final Alignment alignment; // aligns the child within the button
+
+  const AppBaseButton({
+    Key? key,
+    required this.text,
+    this.onPressed,
+    this.onLongPress,
+    this.focusNode,
+    this.autofocus = false,
+    this.clipBehavior = Clip.none,
+
+    // Default values for styleFrom:
+    this.foregroundColor = Colors.white,
+    this.disabledForegroundColor = Colors.grey,
+    this.backgroundColor = Colors.blue,
+    this.disabledBackgroundColor = Colors.grey,
+    this.shadowColor = Colors.black,
+    this.elevation = 0.0,
+    this.textStyle = const TextStyle(color: Colors.white),
+    this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    this.minimumSize = const Size(64, 36),
+    this.side = const BorderSide(color: Colors.transparent),
+    this.shape = const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+    ),
+    this.enabledMouseCursor,
+    this.disabledMouseCursor,
+    this.visualDensity = VisualDensity.standard,
+    this.tapTargetSize = MaterialTapTargetSize.padded,
+    this.animationDuration = kThemeChangeDuration,
+    this.enableFeedback = true,
+    this.alignment = Alignment.center,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      onLongPress: onLongPress,
+      focusNode: focusNode,
+      autofocus: autofocus,
+      clipBehavior: clipBehavior,
+      style: TextButton.styleFrom(
+        foregroundColor: foregroundColor,
+        disabledForegroundColor: disabledForegroundColor,
+        backgroundColor: backgroundColor,
+        disabledBackgroundColor: disabledBackgroundColor,
+        shadowColor: shadowColor,
+        elevation: elevation,
+        textStyle: textStyle,
+        padding: padding,
+        minimumSize: minimumSize,
+        side: side,
+        shape: shape,
+        enabledMouseCursor: enabledMouseCursor,
+        disabledMouseCursor: disabledMouseCursor,
+        visualDensity: visualDensity,
+        tapTargetSize: tapTargetSize,
+        animationDuration: animationDuration,
+        enableFeedback: enableFeedback,
+        alignment: alignment,
+      ),
+      child: Text(text),
+    );
+  }
+}
+
+/// A helper class with static methods to create different styled buttons
+/// using [AppBaseButton].
+class AppButtons {
+  static AppBaseButton primary({
+    required String text,
+    VoidCallback? onPressed,
+  }) {
+    return AppBaseButton(
+      text: text,
+      onPressed: onPressed,
+      foregroundColor: Colors.white,
+      backgroundColor: Colors.blue,
+      textStyle:
+          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    );
+  }
 }

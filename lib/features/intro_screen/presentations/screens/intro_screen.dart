@@ -1,5 +1,6 @@
 import 'package:emendo/core/utility/const/app_colors.dart';
 import 'package:emendo/core/utility/functions/app_text_styles.dart';
+import 'package:emendo/core/utility/widgets/app_buttons.dart';
 import 'package:flutter/material.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -114,6 +115,7 @@ class _IntroScreenState extends State<IntroScreen> {
                             ),
                             textAlign: TextAlign.center,
                           ),
+                          // AppButtons.appBaseButton(text: "Get Started"),
                         ],
                       ),
                     ),
