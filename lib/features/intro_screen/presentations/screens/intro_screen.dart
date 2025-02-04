@@ -2,14 +2,14 @@ import 'package:emendo/core/utility/const/app_colors.dart';
 import 'package:emendo/core/utility/functions/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class IntroScreen extends StatefulWidget {
+  const IntroScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<IntroScreen> createState() => _IntroScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _IntroScreenState extends State<IntroScreen> {
   final GlobalKey _redKey = GlobalKey();
   double redHeight = 0;
 

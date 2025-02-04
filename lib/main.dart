@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/splash_screen/presentations/screens/splash_screen.dart';
+import 'features/intro_screen/presentations/screens/intro_screen.dart';
 
 void main() {
   runApp(
@@ -8,7 +8,7 @@ void main() {
       builder: (context) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          home: IntroScreen(),
         );
       },
     ),
