@@ -28,7 +28,8 @@ class AppTextStyles {
       fontSize: fontSize ?? 16.0,
       fontWeight: fontWeight ?? FontWeight.normal,
       fontStyle: fontStyle ?? FontStyle.normal,
-      color: color ?? const Color(0xFF000000),
+      color: color ??
+          (AppConfig.isDark ? DarkColors.thirdText : LightColors.thirdText),
       fontFamily: fontFamily ?? 'OpenSans',
       letterSpacing: letterSpacing,
       wordSpacing: wordSpacing,
