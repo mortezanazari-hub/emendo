@@ -7,6 +7,7 @@ void main() {
     Builder(
       builder: (context) {
         return MaterialApp(
+          theme: ThemeData(fontFamily: "OpenSans"),
           debugShowCheckedModeBanner: false,
           home: IntroScreen(),
         );

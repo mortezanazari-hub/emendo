@@ -31,7 +31,6 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Center(
             child: Stack(
@@ -124,7 +123,12 @@ class _IntroScreenState extends State<IntroScreen> {
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          // AppButtons.appBaseButton(text: "Get Started"),
+                          SizedBox(height: 15),
+                          AppButtons.primaryBold(
+                            onPressed: () {},
+                            text: "Started",
+                          ),
+                          SizedBox(height: 15),
                         ],
                       ),
                     ),

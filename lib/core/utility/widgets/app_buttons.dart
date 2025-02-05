@@ -1,6 +1,18 @@
+import 'package:emendo/core/utility/functions/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
+import '../configs/app_config.dart';
+import '../const/app_colors.dart';
+
 class AppBaseButton extends StatelessWidget {
+  ///size of button
+  final double? width;
+  final double? height;
+
+  ///text specific
+  final double? fontSize;
+  final FontWeight? fontWeight;
+
   /// The text displayed on the button.
   final String text;
 
@@ -42,7 +54,7 @@ class AppBaseButton extends StatelessWidget {
   final Alignment alignment; // aligns the child within the button
 
   const AppBaseButton({
-    Key? key,
+    super.key,
     required this.text,
     this.onPressed,
     this.onLongPress,
@@ -56,13 +68,13 @@ class AppBaseButton extends StatelessWidget {
     this.backgroundColor = Colors.blue,
     this.disabledBackgroundColor = Colors.grey,
     this.shadowColor = Colors.black,
-    this.elevation = 0.0,
+    this.elevation = 14,
     this.textStyle = const TextStyle(color: Colors.white),
     this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
     this.minimumSize = const Size(64, 36),
     this.side = const BorderSide(color: Colors.transparent),
     this.shape = const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+      borderRadius: BorderRadius.all(Radius.circular(16)),
     ),
     this.enabledMouseCursor,
     this.disabledMouseCursor,
@@ -71,37 +83,49 @@ class AppBaseButton extends StatelessWidget {
     this.animationDuration = kThemeChangeDuration,
     this.enableFeedback = true,
     this.alignment = Alignment.center,
-  }) : super(key: key);
+    this.width,
+    this.height,
+    this.fontSize,
+    this.fontWeight,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      onLongPress: onLongPress,
-      focusNode: focusNode,
-      autofocus: autofocus,
-      clipBehavior: clipBehavior,
-      style: TextButton.styleFrom(
-        foregroundColor: foregroundColor,
-        disabledForegroundColor: disabledForegroundColor,
-        backgroundColor: backgroundColor,
-        disabledBackgroundColor: disabledBackgroundColor,
-        shadowColor: shadowColor,
-        elevation: elevation,
-        textStyle: textStyle,
-        padding: padding,
-        minimumSize: minimumSize,
-        side: side,
-        shape: shape,
-        enabledMouseCursor: enabledMouseCursor,
-        disabledMouseCursor: disabledMouseCursor,
-        visualDensity: visualDensity,
-        tapTargetSize: tapTargetSize,
-        animationDuration: animationDuration,
-        enableFeedback: enableFeedback,
-        alignment: alignment,
+    return Container(
+      width: width,
+      height: height,
+      child: TextButton(
+        onPressed: onPressed,
+        onLongPress: onLongPress,
+        focusNode: focusNode,
+        autofocus: autofocus,
+        clipBehavior: clipBehavior,
+        style: TextButton.styleFrom(
+          foregroundColor: foregroundColor,
+          disabledForegroundColor: disabledForegroundColor,
+          backgroundColor: backgroundColor,
+          disabledBackgroundColor: disabledBackgroundColor,
+          shadowColor: shadowColor,
+          elevation: elevation,
+          textStyle: textStyle,
+          padding: padding,
+          minimumSize: minimumSize,
+          side: side,
+          shape: shape,
+          enabledMouseCursor: enabledMouseCursor,
+          disabledMouseCursor: disabledMouseCursor,
+          visualDensity: visualDensity,
+          tapTargetSize: tapTargetSize,
+          animationDuration: animationDuration,
+          enableFeedback: enableFeedback,
+          alignment: alignment,
+        ),
+        child: Text(text,
+            style: AppTextStyles.base(
+                color: Colors.white,
+                fontSize: fontSize,
+                fontWeight: fontWeight)),
       ),
-      child: Text(text),
     );
   }
 }
@@ -114,10 +138,32 @@ class AppButtons {
     VoidCallback? onPressed,
   }) {
     return AppBaseButton(
+      width: 300,
+      height: 48,
       text: text,
       onPressed: onPressed,
-      foregroundColor: Colors.white,
-      backgroundColor: Colors.blue,
+      foregroundColor: AppConfig.isDark ? DarkColors.white : LightColors.white,
+      backgroundColor:
+          AppConfig.isDark ? DarkColors.primeColor : LightColors.primeColor,
+      textStyle:
+          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+    );
+  }
+
+  static AppBaseButton primaryBold({
+    required String text,
+    VoidCallback? onPressed,
+  }) {
+    return AppBaseButton(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      width: 300,
+      height: 48,
+      text: text,
+      onPressed: onPressed,
+      foregroundColor: AppConfig.isDark ? DarkColors.white : LightColors.white,
+      backgroundColor:
+          AppConfig.isDark ? DarkColors.primeColor : LightColors.primeColor,
       textStyle:
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
     );
