@@ -1,3 +1,4 @@
+import 'package:emendo/core/utility/configs/app_config.dart';
 import 'package:emendo/core/utility/const/app_colors.dart';
 import 'package:emendo/core/utility/functions/app_text_styles.dart';
 import 'package:emendo/core/utility/widgets/app_buttons.dart';
@@ -72,7 +73,9 @@ class _IntroScreenState extends State<IntroScreen> {
                       width: MediaQuery.of(context).size.width,
                       height: 500,
                       decoration: BoxDecoration(
-                        color: AppColors.color0,
+                        color: AppConfig.isDark
+                            ? DarkColors.bgColor
+                            : LightColors.bgColor,
                         borderRadius: const BorderRadius.vertical(
                           top: Radius.circular(30),
                           bottom: Radius.circular(0),
@@ -93,7 +96,10 @@ class _IntroScreenState extends State<IntroScreen> {
                               Text(
                                 " Do",
                                 style: AppTextStyles.logoBase(
-                                    color: AppColors.color4),
+                                  color: AppConfig.isDark
+                                      ? DarkColors.primeColor
+                                      : LightColors.primeColor,
+                                ),
                               ),
                             ],
                           ),
@@ -101,7 +107,9 @@ class _IntroScreenState extends State<IntroScreen> {
                           Text(
                             "Building Better \nWorkplaces ",
                             style: AppTextStyles.base(
-                                color: AppColors.color7,
+                                color: AppConfig.isDark
+                                    ? DarkColors.secondText
+                                    : LightColors.secondText,
                                 fontSize: 34,
                                 fontWeight: FontWeight.w600),
                             textAlign: TextAlign.center,
@@ -110,9 +118,10 @@ class _IntroScreenState extends State<IntroScreen> {
                             "Create a unique emotional story that\ndescribes better than words ",
                             style: AppTextStyles.base(
                               fontSize: 13,
-                              color: AppColors.color2,
-                              fontWeight: FontWeight.bold
-                            ),
+                                color: AppConfig.isDark
+                                    ? DarkColors.thirdText
+                                    : LightColors.thirdText,
+                                fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
                           // AppButtons.appBaseButton(text: "Get Started"),

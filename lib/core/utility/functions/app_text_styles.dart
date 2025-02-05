@@ -1,6 +1,8 @@
 import 'package:emendo/core/utility/const/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../configs/app_config.dart';
+
 class AppTextStyles {
   ///General TextStyle
   static TextStyle base({
@@ -67,7 +69,7 @@ class AppTextStyles {
       fontSize: fontSize ?? 63.0,
       fontWeight: fontWeight ?? FontWeight.bold,
       fontStyle: fontStyle ?? FontStyle.normal,
-      color: color ?? AppColors.color8,
+      color: color ?? (AppConfig.isDark ? DarkColors.black : LightColors.black),
       fontFamily: fontFamily ?? 'MadimiOne',
       letterSpacing: letterSpacing ?? 1.5,
       wordSpacing: wordSpacing,
@@ -83,7 +85,4 @@ class AppTextStyles {
       overflow: overflow,
     );
   }
-
-
-
 }
