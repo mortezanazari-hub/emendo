@@ -44,7 +44,7 @@ class _IntroScreenState extends State<IntroScreen> {
                     Container(
                       key: _redKey,
                       child: Image.asset(
-                        "lib/core/resources/images/png/get_start_screen.png",
+                        "assets/images/png/get_start_screen.png",
                         frameBuilder:
                             (context, child, frame, wasSynchronouslyLoaded) {
                           if (frame != null || wasSynchronouslyLoaded) {
@@ -58,7 +58,7 @@ class _IntroScreenState extends State<IntroScreen> {
                       top: 20,
                       left: 20,
                       child: Image.asset(
-                        "lib/core/resources/images/png/mini_logo.png",
+                        "assets/images/png/mini_logo.png",
                         height: 30,
                       ),
                     ),
