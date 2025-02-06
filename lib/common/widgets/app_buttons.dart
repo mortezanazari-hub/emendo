@@ -1,8 +1,9 @@
-import 'package:emendo/core/utility/functions/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../configs/app_config.dart';
-import '../const/app_colors.dart';
+import '../../core/configs/app_config.dart';
+import '../../core/configs/app_colors.dart';
+import '../../core/configs/app_text_styles.dart';
+
 
 class AppBaseButton extends StatelessWidget {
   ///size of button

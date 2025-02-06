@@ -1,7 +1,6 @@
-import 'package:emendo/core/utility/const/app_colors.dart';
 import 'package:flutter/material.dart';
-
-import '../configs/app_config.dart';
+import 'app_config.dart';
+import 'app_colors.dart';
 
 class AppTextStyles {
   ///General TextStyle
