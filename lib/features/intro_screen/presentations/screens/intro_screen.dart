@@ -44,7 +44,7 @@ class _IntroScreenState extends State<IntroScreen> {
                     Container(
                       key: _redKey,
                       child: Image.asset(
-                        "lib/core/resources/images/png/splash_screen_start.png",
+                        "lib/core/resources/images/png/get_start_screen.png",
                         frameBuilder:
                             (context, child, frame, wasSynchronouslyLoaded) {
                           if (frame != null || wasSynchronouslyLoaded) {
