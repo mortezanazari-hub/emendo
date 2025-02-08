@@ -91,11 +91,12 @@ class _IntroScreenState extends State<IntroScreen> {
                             children: [
                               Text(
                                 "Emen",
-                                style: AppTextStyles.logoBase(),
+                                style: AppTextStyles.logoBase(context: context),
                               ),
                               Text(
                                 " Do",
                                 style: AppTextStyles.logoBase(
+                                  context: context,
                                   color: context.isDarkMode
                                       ? DarkColors.primeColor
                                       : LightColors.primeColor,
@@ -107,6 +108,7 @@ class _IntroScreenState extends State<IntroScreen> {
                           Text(
                             "Building Better \nWorkplaces ",
                             style: AppTextStyles.base(
+                              context: context,
                                 color: context.isDarkMode
                                     ? DarkColors.secondText
                                     : LightColors.secondText,
@@ -117,7 +119,8 @@ class _IntroScreenState extends State<IntroScreen> {
                           Text(
                             "Create a unique emotional story that\ndescribes better than words ",
                             style: AppTextStyles.base(
-                              fontSize: 13,
+                                context:context,
+                                fontSize: 13,
                                 color: context.isDarkMode
                                     ? DarkColors.thirdText
                                     : LightColors.thirdText,

@@ -122,6 +122,7 @@ class AppBaseButton extends StatelessWidget {
         ),
         child: Text(text,
             style: AppTextStyles.base(
+              context: context,
                 color: Colors.white,
                 fontSize: fontSize,
                 fontWeight: fontWeight)),

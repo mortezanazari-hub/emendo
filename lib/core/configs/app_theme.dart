@@ -7,7 +7,7 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     primaryColor: LightColors.primeColor,
     brightness: Brightness.light,
-    fontFamily: '',
+    fontFamily: 'OpenSans',
     // hoverColor:,
     focusColor: Colors.transparent,
     highlightColor: Colors.transparent,
@@ -55,7 +55,7 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
     primaryColor: DarkColors.primeColor,
     brightness: Brightness.dark,
-    fontFamily: '',
+    fontFamily: 'OpenSans',
     splashFactory: NoSplash.splashFactory,
     // hoverColor:
     splashColor: Colors.transparent,
