@@ -126,6 +126,7 @@ class _IntroScreenState extends State<IntroScreen> {
                           ),
                           SizedBox(height: 15),
                           AppButtons.primaryBold(
+                            context: context,
                             onPressed: () {},
                             text: "Started",
                           ),

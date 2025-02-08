@@ -1,6 +1,5 @@
+import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/configs/app_config.dart';
 import '../../core/configs/app_colors.dart';
 import '../../core/configs/app_text_styles.dart';
 
@@ -135,6 +134,7 @@ class AppBaseButton extends StatelessWidget {
 /// using [AppBaseButton].
 class AppButtons {
   static AppBaseButton primary({
+    required BuildContext context,
     required String text,
     VoidCallback? onPressed,
   }) {
@@ -143,15 +143,16 @@ class AppButtons {
       height: 48,
       text: text,
       onPressed: onPressed,
-      foregroundColor: AppConfig.isDark ? DarkColors.white : LightColors.white,
+      foregroundColor: context.isDarkMode ? DarkColors.white : LightColors.white,
       backgroundColor:
-          AppConfig.isDark ? DarkColors.primeColor : LightColors.primeColor,
+          context.isDarkMode? DarkColors.primeColor : LightColors.primeColor,
       textStyle:
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
     );
   }
 
   static AppBaseButton primaryBold({
+    required BuildContext context,
     required String text,
     VoidCallback? onPressed,
   }) {
@@ -162,9 +163,9 @@ class AppButtons {
       height: 48,
       text: text,
       onPressed: onPressed,
-      foregroundColor: AppConfig.isDark ? DarkColors.white : LightColors.white,
+      foregroundColor: context.isDarkMode? DarkColors.white : LightColors.white,
       backgroundColor:
-          AppConfig.isDark ? DarkColors.primeColor : LightColors.primeColor,
+          context.isDarkMode ? DarkColors.primeColor : LightColors.primeColor,
       textStyle:
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
     );
