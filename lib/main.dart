@@ -2,7 +2,9 @@ import 'package:emendo/core/configs/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'features/intro/presentations/screens/intro_screen.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     Builder(
       builder: (context) {
