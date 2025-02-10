@@ -1,13 +1,15 @@
+import 'package:emendo/core/configs/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'features/intro/presentations/screens/intro_screen.dart';
 
-import 'features/intro_screen/presentations/screens/intro_screen.dart';
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
   runApp(
     Builder(
       builder: (context) {
         return MaterialApp(
-          theme: ThemeData(fontFamily: "OpenSans"),
+          theme: AppTheme.lightTheme,
           debugShowCheckedModeBanner: false,
           home: IntroScreen(),
         );

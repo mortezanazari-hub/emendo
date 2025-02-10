@@ -1,11 +1,11 @@
-import 'package:emendo/core/utility/const/app_colors.dart';
+import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:flutter/material.dart';
-
-import '../configs/app_config.dart';
+import 'app_colors.dart';
 
 class AppTextStyles {
   ///General TextStyle
   static TextStyle base({
+    required BuildContext context,
     double? fontSize,
     FontWeight? fontWeight,
     FontStyle? fontStyle,
@@ -29,7 +29,7 @@ class AppTextStyles {
       fontWeight: fontWeight ?? FontWeight.normal,
       fontStyle: fontStyle ?? FontStyle.normal,
       color: color ??
-          (AppConfig.isDark ? DarkColors.thirdText : LightColors.thirdText),
+          ( context.isDarkMode ? DarkColors.thirdText : LightColors.thirdText),
       fontFamily: fontFamily ?? 'OpenSans',
       letterSpacing: letterSpacing,
       wordSpacing: wordSpacing,
@@ -48,6 +48,7 @@ class AppTextStyles {
 
   ///base for logo
   static TextStyle logoBase({
+    required BuildContext context,
     double? fontSize,
     FontWeight? fontWeight,
     FontStyle? fontStyle,
@@ -67,10 +68,11 @@ class AppTextStyles {
     TextOverflow? overflow,
   }) {
     return base(
+      context: context,
       fontSize: fontSize ?? 63.0,
       fontWeight: fontWeight ?? FontWeight.bold,
       fontStyle: fontStyle ?? FontStyle.normal,
-      color: color ?? (AppConfig.isDark ? DarkColors.black : LightColors.black),
+      color: color ?? (context.isDarkMode ? DarkColors.black : LightColors.black),
       fontFamily: fontFamily ?? 'MadimiOne',
       letterSpacing: letterSpacing ?? 1.5,
       wordSpacing: wordSpacing,
