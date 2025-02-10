@@ -92,39 +92,46 @@ class AppBaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
       height: height,
-      child: TextButton(
-        onPressed: onPressed,
-        onLongPress: onLongPress,
-        focusNode: focusNode,
-        autofocus: autofocus,
-        clipBehavior: clipBehavior,
-        style: TextButton.styleFrom(
-          foregroundColor: foregroundColor,
-          disabledForegroundColor: disabledForegroundColor,
-          backgroundColor: backgroundColor,
-          disabledBackgroundColor: disabledBackgroundColor,
-          shadowColor: shadowColor,
-          elevation: elevation,
-          textStyle: textStyle,
-          padding: padding,
-          minimumSize: minimumSize,
-          side: side,
-          shape: shape,
-          enabledMouseCursor: enabledMouseCursor,
-          disabledMouseCursor: disabledMouseCursor,
-          visualDensity: visualDensity,
-          tapTargetSize: tapTargetSize,
-          animationDuration: animationDuration,
-          enableFeedback: enableFeedback,
-          alignment: alignment,
-        ),
-        child: Text(text,
-            style: AppTextStyles.base(
-                color: Colors.white,
-                fontSize: fontSize,
-                fontWeight: fontWeight)),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          Flexible(
+            fit: FlexFit.tight,
+            child: TextButton(
+              onPressed: onPressed,
+              onLongPress: onLongPress,
+              focusNode: focusNode,
+              autofocus: autofocus,
+              clipBehavior: clipBehavior,
+              style: TextButton.styleFrom(
+                foregroundColor: foregroundColor,
+                disabledForegroundColor: disabledForegroundColor,
+                backgroundColor: backgroundColor,
+                disabledBackgroundColor: disabledBackgroundColor,
+                shadowColor: shadowColor,
+                elevation: elevation,
+                textStyle: textStyle,
+                padding: padding,
+                minimumSize: minimumSize,
+                side: side,
+                shape: shape,
+                enabledMouseCursor: enabledMouseCursor,
+                disabledMouseCursor: disabledMouseCursor,
+                visualDensity: visualDensity,
+                tapTargetSize: tapTargetSize,
+                animationDuration: animationDuration,
+                enableFeedback: enableFeedback,
+                alignment: alignment,
+              ),
+              child: Text(text,
+                  style: AppTextStyles.base(
+                      color: Colors.white,
+                      fontSize: fontSize,
+                      fontWeight: fontWeight)),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -157,7 +164,7 @@ class AppButtons {
     return AppBaseButton(
       fontSize: 18,
       fontWeight: FontWeight.w600,
-      width: 300,
+      // width: 300,
       height: 48,
       text: text,
       onPressed: onPressed,
