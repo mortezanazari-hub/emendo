@@ -10,6 +10,7 @@ Future<void> main() async{
       builder: (context) {
         return MaterialApp(
           theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
           debugShowCheckedModeBanner: false,
           home: IntroScreen(),
         );

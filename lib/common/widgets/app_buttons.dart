@@ -1,8 +1,8 @@
-import 'package:emendo/core/utility/functions/app_text_styles.dart';
+import 'package:emendo/common/helper/is_dark_mode.dart';
+import 'package:emendo/core/configs/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../configs/app_config.dart';
-import '../const/app_colors.dart';
+import '../../core/configs/app_text_styles.dart';
 
 class AppBaseButton extends StatelessWidget {
   ///size of button
@@ -91,6 +91,7 @@ class AppBaseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.isDarkMode;
     return Container(
       height: height,
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -128,7 +129,9 @@ class AppBaseButton extends StatelessWidget {
                   style: AppTextStyles.base(
                       color: Colors.white,
                       fontSize: fontSize,
-                      fontWeight: fontWeight)),
+                    fontWeight: fontWeight,
+                    context: context,
+                  )),
             ),
           ),
         ],
@@ -142,16 +145,17 @@ class AppBaseButton extends StatelessWidget {
 class AppButtons {
   static AppBaseButton primary({
     required String text,
+    required BuildContext context,
     VoidCallback? onPressed,
   }) {
+    final isDark = context.isDarkMode;
     return AppBaseButton(
       width: 300,
       height: 48,
       text: text,
       onPressed: onPressed,
-      foregroundColor: AppConfig.isDark ? DarkColors.white : LightColors.white,
-      backgroundColor:
-          AppConfig.isDark ? DarkColors.primeColor : LightColors.primeColor,
+      foregroundColor: isDark ? DarkColors.white : LightColors.white,
+      backgroundColor: isDark ? DarkColors.primeColor : LightColors.primeColor,
       textStyle:
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
     );
@@ -160,7 +164,9 @@ class AppButtons {
   static AppBaseButton primaryBold({
     required String text,
     VoidCallback? onPressed,
+    required BuildContext context,
   }) {
+    final isDark = context.isDarkMode;
     return AppBaseButton(
       fontSize: 18,
       fontWeight: FontWeight.w600,
@@ -168,9 +174,8 @@ class AppButtons {
       height: 48,
       text: text,
       onPressed: onPressed,
-      foregroundColor: AppConfig.isDark ? DarkColors.white : LightColors.white,
-      backgroundColor:
-          AppConfig.isDark ? DarkColors.primeColor : LightColors.primeColor,
+      foregroundColor: isDark ? DarkColors.white : LightColors.white,
+      backgroundColor: isDark ? DarkColors.primeColor : LightColors.primeColor,
       textStyle:
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
     );
