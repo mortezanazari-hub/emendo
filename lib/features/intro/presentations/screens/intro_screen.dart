@@ -63,7 +63,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   ),
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: EdgeInsets.all(constraints.maxWidth * 0.08),
                       child: Column(
                         spacing: constraints.maxHeight * 0.025,
                         mainAxisSize: MainAxisSize.min,
@@ -86,9 +86,8 @@ class _IntroScreenState extends State<IntroScreen> {
                               ),
                             ],
                           ),
-                          //SizedBox(height: constraints.maxHeight * 0.02),
                           Text(
-                            "Building Better \nWorkplaces ",
+                            "Building Better Workplaces ",
                             style: AppTextStyles.base(
                                 context: context,
                                 color: context.isDarkMode
@@ -98,9 +97,8 @@ class _IntroScreenState extends State<IntroScreen> {
                                 fontWeight: FontWeight.w600),
                             textAlign: TextAlign.center,
                           ),
-                          //SizedBox(height: constraints.maxHeight * 0.02),
                           Text(
-                            "Create a unique emotional story that\ndescribes better than words ",
+                            "Create a unique emotional story that describes better than words ",
                             style: AppTextStyles.base(
                                 context: context,
                                 fontSize: 13,
@@ -110,7 +108,6 @@ class _IntroScreenState extends State<IntroScreen> {
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          //  SizedBox(height: constraints.maxHeight * 0.03),
                           AppButtons.primaryBold(
                             context: context,
                             onPressed: () {

@@ -94,7 +94,7 @@ class AppBaseButton extends StatelessWidget {
     //final isDark = context.isDarkMode;
     return Container(
       height: height,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      //padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
           Flexible(
