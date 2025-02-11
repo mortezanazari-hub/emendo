@@ -1,4 +1,5 @@
 import 'package:emendo/common/helper/is_dark_mode.dart';
+import 'package:emendo/features/intro/presentations/screens/intro_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../common/widgets/app_buttons.dart';
@@ -13,79 +14,60 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  final GlobalKey _redKey = GlobalKey();
-  double redHeight = 0;
-
-  void updateRedHeight() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final renderBox =
-          _redKey.currentContext?.findRenderObject() as RenderBox?;
-      if (renderBox != null && renderBox.size.height != redHeight) {
-        setState(() {
-          redHeight = renderBox.size.height;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
-            child: Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.bottomCenter,
-              children: [
-                ///bg and logo stack
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      key: _redKey,
-                      child: Image.asset(
-                        "assets/images/png/get_start_screen.png",
-                        frameBuilder:
-                            (context, child, frame, wasSynchronouslyLoaded) {
-                          if (frame != null || wasSynchronouslyLoaded) {
-                            updateRedHeight();
-                          }
-                          return child;
-                        },
-                      ),
-                    ),
-                    Positioned(
-                      top: 20,
-                      left: 20,
-                      child: Image.asset(
-                        "assets/images/png/mini_logo.png",
-                        height: 30,
-                      ),
-                    ),
-                  ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Stack(
+            children: [
+              Column(
+                children: [
+                  Image.asset(
+                    "assets/images/png/get_start_screen.png",
+                    width: double.infinity,
+                    height: constraints.maxHeight * 0.50,
+                    fit: BoxFit.cover,
+                  ),
+                  Container(
+                    height: constraints.maxHeight * 0.50,
+                    color: context.isDarkMode
+                        ? DarkColors.bgColor
+                        : LightColors.bgColor,
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 20,
+                left: 20,
+                child: SafeArea(
+                  child: Image.asset(
+                    "assets/images/png/mini_logo.png",
+                    height: 30,
+                  ),
                 ),
-
-                if (redHeight > 0)
-                  Positioned(
-                    top: redHeight - 50,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 500,
-                      decoration: BoxDecoration(
-                        color: context.isDarkMode
-                            ? DarkColors.bgColor
-                            : LightColors.bgColor,
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(30),
-                          bottom: Radius.circular(0),
-                        ),
-                      ),
+              ),
+              Positioned(
+                top: constraints.maxHeight * 0.40,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: constraints.maxHeight * 0.60,
+                  decoration: BoxDecoration(
+                    color: context.isDarkMode
+                        ? DarkColors.bgColor
+                        : LightColors.bgColor,
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(30),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
                       child: Column(
+                        spacing: constraints.maxHeight * 0.025,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(height: 30),
-
-                          ///logotype
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -104,11 +86,11 @@ class _IntroScreenState extends State<IntroScreen> {
                               ),
                             ],
                           ),
-
+                          //SizedBox(height: constraints.maxHeight * 0.02),
                           Text(
                             "Building Better \nWorkplaces ",
                             style: AppTextStyles.base(
-                              context: context,
+                                context: context,
                                 color: context.isDarkMode
                                     ? DarkColors.secondText
                                     : LightColors.secondText,
@@ -116,10 +98,11 @@ class _IntroScreenState extends State<IntroScreen> {
                                 fontWeight: FontWeight.w600),
                             textAlign: TextAlign.center,
                           ),
+                          //SizedBox(height: constraints.maxHeight * 0.02),
                           Text(
                             "Create a unique emotional story that\ndescribes better than words ",
                             style: AppTextStyles.base(
-                                context:context,
+                                context: context,
                                 fontSize: 13,
                                 color: context.isDarkMode
                                     ? DarkColors.thirdText
@@ -127,21 +110,26 @@ class _IntroScreenState extends State<IntroScreen> {
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          SizedBox(height: 15),
+                          //  SizedBox(height: constraints.maxHeight * 0.03),
                           AppButtons.primaryBold(
                             context: context,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => IntroSlider()));
+                            },
                             text: "Started",
                           ),
-                          SizedBox(height: 15),
                         ],
                       ),
                     ),
                   ),
-              ],
-            ),
-          ),
-        ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
