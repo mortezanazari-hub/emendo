@@ -7,6 +7,7 @@ class LightColors {
   static const Color disableBorder = Color(0xffE9F1FF);
 
   static const Color primeColor = Color(0xff746DF1);
+  static const Color disableSliderColor = Color(0x363580FF);
 
   static const Color mainText = Color(0xff002055);
   static const Color secondText = Color(0xff2F394B);
@@ -25,6 +26,7 @@ class DarkColors {
   static const Color disableBorder = Color(0xffE9F1FF);
 
   static const Color primeColor = Color(0xff746DF1);
+  static const Color disableSliderColor = Color(0x363580FF);
 
   static const Color mainText = Color(0xff002055);
   static const Color secondText = Color(0xff2F394B);

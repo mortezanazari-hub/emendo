@@ -1,5 +1,7 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
+import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
 class IntroSlider extends StatefulWidget {
@@ -10,41 +12,237 @@ class IntroSlider extends StatefulWidget {
 }
 
 class _IntroSliderState extends State<IntroSlider> {
+  final PageController _pageController = PageController();
+  double _currentIndex = 0.0;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
         return Column(
           children: [
-            Container(
-              height: constraints.maxHeight * 0.55,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: context.isDarkMode
-                    ? DarkColors.bgColor
-                    : LightColors.bgColor,
-              ),
-              child: Image.asset(
-                "assets/images/png/intro_screen_slide1.png",
-                fit: BoxFit.fitWidth,
-                alignment: Alignment.topCenter,
-                isAntiAlias: true,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: constraints.maxHeight * 0.05),
-              child: Column(
+            ///page view
+            SizedBox(
+              height: constraints.maxHeight * 0.85,
+              child: PageView(
+                scrollDirection: Axis.horizontal,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentIndex = index.toDouble();
+                  });
+                },
+                controller: _pageController,
                 children: [
-                  Text(
-                    "Task Management",
+                  IntroPageSlide(
+                    constraints: constraints,
+                    index: 1,
+                    firstLineText: "Lets create a",
+                    secondLineMarkedText: "Space",
+                    secondLineText: " for your",
+                    thirdLineText: "workflows",
+                  ),
+                  IntroPageSlide(
+                    constraints: constraints,
+                    index: 2,
+                    firstLineText: "ٌWork more",
+                    secondLineMarkedText: "Structure",
+                    secondLineText: " and",
+                    thirdLineText: "Organized",
+                  ),
+                  IntroPageSlide(
+                    constraints: constraints,
+                    index: 3,
+                    firstLineText: "Manage your",
+                    secondLineMarkedText: "Tasks",
+                    secondLineText: " quickly for",
+                    thirdLineText: "Results",
                   ),
                 ],
               ),
-            )
+            ),
+
+            ///of main page
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth * 0.07),
+                child: Column(
+                  children: [
+                    //SizedBox(height: constraints.maxHeight * 0.015),
+                    Flexible(
+                      child: Row(
+                        children: [
+                          DotsIndicator(
+                            position: _currentIndex,
+                            dotsCount: 3,
+                            animate: true,
+                            decorator: DotsDecorator(
+                              color: context.isDarkMode
+                                  ? DarkColors.disableSliderColor
+                                  : LightColors.disableSliderColor,
+                              activeColor: context.isDarkMode
+                                  ? DarkColors.primeColor
+                                  : LightColors.primeColor,
+                              size: const Size(8, 8),
+                              activeSize: const Size(20.0, 6.0),
+                              activeShape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Flexible(
+                      child: Row(
+                        children: [
+                          TextButton(onPressed: () {}, child: Text("Skip")),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         );
       }),
+    );
+  }
+}
+
+class IntroPageSlide extends StatelessWidget {
+  final BoxConstraints constraints;
+  final int index;
+  final String firstLineText;
+  final String secondLineMarkedText;
+  final String secondLineText;
+  final String thirdLineText;
+
+  const IntroPageSlide({
+    super.key,
+    required this.constraints,
+    required this.index,
+    required this.firstLineText,
+    required this.secondLineMarkedText,
+    required this.secondLineText,
+    required this.thirdLineText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: constraints.maxHeight * 0.55,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color:
+                context.isDarkMode ? DarkColors.bgColor : LightColors.bgColor,
+          ),
+          child: Image.asset(
+            "assets/images/png/intro_screen_slide${index.toString()}.png",
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.topCenter,
+            isAntiAlias: true,
+          ),
+        ),
+        Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: constraints.maxHeight * 0.05),
+          child: Column(
+            children: [
+              //task management
+              Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      "Task Management",
+                      style: AppTextStyles.base(
+                        context: context,
+                        color: context.isDarkMode
+                            ? DarkColors.primeColor
+                            : LightColors.primeColor,
+                        //fontSize: 28.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              //first line text
+              Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      firstLineText,
+                      style: AppTextStyles.base(
+                        context: context,
+                        color: context.isDarkMode
+                            ? DarkColors.mainText
+                            : LightColors.mainText,
+                        fontSize: 35,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              //second line text
+              Row(
+                children: [
+                  Text(
+                    secondLineMarkedText,
+                    style: AppTextStyles.base(
+                      context: context,
+                      color: context.isDarkMode
+                          ? DarkColors.primeColor
+                          : LightColors.primeColor,
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    secondLineText,
+                    style: AppTextStyles.base(
+                      context: context,
+                      color: context.isDarkMode
+                          ? DarkColors.mainText
+                          : LightColors.mainText,
+                      fontSize: 35,
+                      // fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              //third line text
+              Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      thirdLineText,
+                      style: AppTextStyles.base(
+                        context: context,
+                        color: context.isDarkMode
+                            ? DarkColors.mainText
+                            : LightColors.mainText,
+                        fontSize: 35,
+                        // fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }
