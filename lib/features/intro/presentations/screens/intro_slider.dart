@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class IntroSlider extends StatefulWidget {
   const IntroSlider({super.key});
@@ -25,92 +28,113 @@ class _IntroSliderState extends State<IntroSlider> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
-        return Column(
-          children: [
-            ///page view
-            SizedBox(
-              height: constraints.maxHeight * 0.85,
-              child: PageView(
-                scrollDirection: Axis.horizontal,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentIndex = index.toDouble();
-                  });
-                },
-                controller: _pageController,
+        return SizedBox(
+          height: constraints.maxHeight,
+          width: constraints.maxWidth,
+          child: Stack(
+            children: [
+              Column(
                 children: [
-                  IntroPageSlide(
-                    constraints: constraints,
-                    index: 1,
-                    firstLineText: "Lets create a",
-                    secondLineMarkedText: "Space",
-                    secondLineText: " for your",
-                    thirdLineText: "workflows",
+                  ///page view
+                  SizedBox(
+                    height: constraints.maxHeight * 0.85,
+                    child: PageView(
+                      scrollDirection: Axis.horizontal,
+                      onPageChanged: (index) {
+                        setState(() {
+                          _currentIndex = index.toDouble();
+                        });
+                      },
+                      controller: _pageController,
+                      children: [
+                        IntroPageSlide(
+                          constraints: constraints,
+                          index: 1,
+                          firstLineText: "Lets create a",
+                          secondLineMarkedText: "Space",
+                          secondLineText: " for your",
+                          thirdLineText: "workflows",
+                        ),
+                        IntroPageSlide(
+                          constraints: constraints,
+                          index: 2,
+                          firstLineText: "ٌWork more",
+                          secondLineMarkedText: "Structure",
+                          secondLineText: " and",
+                          thirdLineText: "Organized",
+                        ),
+                        IntroPageSlide(
+                          constraints: constraints,
+                          index: 3,
+                          firstLineText: "Manage your",
+                          secondLineMarkedText: "Tasks",
+                          secondLineText: " quickly for",
+                          thirdLineText: "Results",
+                        ),
+                      ],
+                    ),
                   ),
-                  IntroPageSlide(
-                    constraints: constraints,
-                    index: 2,
-                    firstLineText: "ٌWork more",
-                    secondLineMarkedText: "Structure",
-                    secondLineText: " and",
-                    thirdLineText: "Organized",
-                  ),
-                  IntroPageSlide(
-                    constraints: constraints,
-                    index: 3,
-                    firstLineText: "Manage your",
-                    secondLineMarkedText: "Tasks",
-                    secondLineText: " quickly for",
-                    thirdLineText: "Results",
-                  ),
-                ],
-              ),
-            ),
 
-            ///of main page
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: constraints.maxWidth * 0.07),
-                child: Column(
-                  children: [
-                    //SizedBox(height: constraints.maxHeight * 0.015),
-                    Flexible(
-                      child: Row(
+                  ///of main page
+                  Flexible(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.07),
+                      child: Column(
                         children: [
-                          DotsIndicator(
-                            position: _currentIndex,
-                            dotsCount: 3,
-                            animate: true,
-                            decorator: DotsDecorator(
-                              color: context.isDarkMode
-                                  ? DarkColors.disableSliderColor
-                                  : LightColors.disableSliderColor,
-                              activeColor: context.isDarkMode
-                                  ? DarkColors.primeColor
-                                  : LightColors.primeColor,
-                              size: const Size(8, 8),
-                              activeSize: const Size(20.0, 6.0),
-                              activeShape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
+                          //SizedBox(height: constraints.maxHeight * 0.015),
+                          Flexible(
+                            child: Row(
+                              children: [
+                                DotsIndicator(
+                                  position: _currentIndex,
+                                  dotsCount: 3,
+                                  animate: true,
+                                  decorator: DotsDecorator(
+                                    color: context.isDarkMode
+                                        ? DarkColors.disableSliderColor
+                                        : LightColors.disableSliderColor,
+                                    activeColor: context.isDarkMode
+                                        ? DarkColors.primeColor
+                                        : LightColors.primeColor,
+                                    size: const Size(8, 8),
+                                    activeSize: const Size(20.0, 6.0),
+                                    activeShape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(5.0)),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+
+                          Flexible(
+                            child: Row(
+                              children: [
+                                TextButton(
+                                    onPressed: () {}, child: Text("Skip")),
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),
-
-                    Flexible(
-                      child: Row(
-                        children: [
-                          TextButton(onPressed: () {}, child: Text("Skip")),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ),
-          ],
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  height: constraints.maxHeight * 0.185,
+                  width: constraints.maxWidth * 0.25,
+                  child: Container(
+                      child: SvgPicture.asset(
+                          "assets/images/svg/next_button_intro.svg")),
+                ),
+              )
+            ],
+          ),
         );
       }),
     );
