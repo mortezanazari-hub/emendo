@@ -24,7 +24,7 @@ class _IntroScreenState extends State<IntroScreen> {
               Column(
                 children: [
                   Image.asset(
-                    "assets/images/png/get_start_screen.png",
+                    "assets/images/get_start_screen.png",
                     width: double.infinity,
                     height: constraints.maxHeight * 0.50,
                     fit: BoxFit.cover,
@@ -42,7 +42,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 left: 20,
                 child: SafeArea(
                   child: Image.asset(
-                    "assets/images/png/mini_logo.png",
+                    "assets/images/mini_logo.png",
                     height: 30,
                   ),
                 ),

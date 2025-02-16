@@ -130,7 +130,7 @@ class _IntroSliderState extends State<IntroSlider> {
                   width: constraints.maxWidth * 0.25,
                   child: Container(
                       child: SvgPicture.asset(
-                          "assets/images/svg/next_button_intro.svg")),
+                          "assets/images/next_button_intro.svg")),
                 ),
               )
             ],
@@ -171,7 +171,7 @@ class IntroPageSlide extends StatelessWidget {
                 context.isDarkMode ? DarkColors.bgColor : LightColors.bgColor,
           ),
           child: Image.asset(
-            "assets/images/png/intro_screen_slide${index.toString()}.png",
+            "assets/images/intro_screen_slide${index.toString()}.png",
             fit: BoxFit.fitWidth,
             alignment: Alignment.topCenter,
             isAntiAlias: true,
