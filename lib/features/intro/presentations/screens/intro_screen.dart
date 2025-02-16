@@ -1,4 +1,5 @@
 import 'package:emendo/common/helper/is_dark_mode.dart';
+import 'package:emendo/core/configs/app_images.dart';
 import 'package:emendo/features/intro/presentations/screens/intro_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class _IntroScreenState extends State<IntroScreen> {
               Column(
                 children: [
                   Image.asset(
-                    "assets/images/get_start_screen.png",
+                    AppImages.getStartScreen,
                     width: double.infinity,
                     height: constraints.maxHeight * 0.50,
                     fit: BoxFit.cover,
@@ -42,7 +43,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 left: 20,
                 child: SafeArea(
                   child: Image.asset(
-                    "assets/images/mini_logo.png",
+                    AppImages.miniLogo,
                     height: 30,
                   ),
                 ),

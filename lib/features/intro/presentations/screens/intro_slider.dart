@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
+import 'package:emendo/core/configs/app_images.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -125,12 +126,10 @@ class _IntroSliderState extends State<IntroSlider> {
               Positioned(
                 bottom: 0,
                 right: 0,
-                child: Container(
+                child: SizedBox(
                   height: constraints.maxHeight * 0.185,
                   width: constraints.maxWidth * 0.25,
-                  child: Container(
-                      child: SvgPicture.asset(
-                          "assets/images/next_button_intro.svg")),
+                  child: SvgPicture.asset(AppImages.nextButtonIntro),
                 ),
               )
             ],
@@ -171,7 +170,7 @@ class IntroPageSlide extends StatelessWidget {
                 context.isDarkMode ? DarkColors.bgColor : LightColors.bgColor,
           ),
           child: Image.asset(
-            "assets/images/intro_screen_slide${index.toString()}.png",
+            AppImages.introScreenSlide(index),
             fit: BoxFit.fitWidth,
             alignment: Alignment.topCenter,
             isAntiAlias: true,

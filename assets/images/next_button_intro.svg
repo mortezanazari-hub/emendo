@@ -1,3 +1,40 @@
-<svg width="94" height="162" viewBox="0 0 94 162" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.98974 123.73C-4.4938 85.8384 15.2618 48.3117 50.1698 32.21L120 0V191H13.5L1.98974 123.73Z" fill="#756EF3"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="94"
+   height="162"
+   viewBox="0 0 94 162"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="next_button_intro.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="1.2068829"
+     inkscape:cx="-42.257622"
+     inkscape:cy="132.98722"
+     inkscape:window-width="1366"
+     inkscape:window-height="697"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M 1.7229867,104.94377 C -3.3467564,72.805345 12.100949,40.976416 39.396932,27.319476 L 94,0 V 162 H 10.723326 Z"
+     fill="#756ef3"
+     id="path1"
+     style="stroke-width:0.814381" />
 </svg>
