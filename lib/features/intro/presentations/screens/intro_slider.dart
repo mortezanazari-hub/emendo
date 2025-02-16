@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';

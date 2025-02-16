@@ -2,7 +2,7 @@ import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/configs/app_text_styles.dart';
+import 'package:emendo/core/configs/app_text_styles.dart';
 
 class AppBaseButton extends StatelessWidget {
   ///size of button
@@ -92,7 +92,7 @@ class AppBaseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //final isDark = context.isDarkMode;
-    return Container(
+    return SizedBox(
       height: height,
       //padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(

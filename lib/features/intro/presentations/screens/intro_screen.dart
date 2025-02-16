@@ -3,9 +3,9 @@ import 'package:emendo/core/configs/app_images.dart';
 import 'package:emendo/features/intro/presentations/screens/intro_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../common/widgets/app_buttons.dart';
-import '../../../../core/configs/app_colors.dart';
-import '../../../../core/configs/app_text_styles.dart';
+import 'package:emendo/common/widgets/app_buttons.dart';
+import 'package:emendo/core/configs/app_colors.dart';
+import 'package:emendo/core/configs/app_text_styles.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
