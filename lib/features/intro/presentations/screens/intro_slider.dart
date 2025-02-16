@@ -122,13 +122,19 @@ class _IntroSliderState extends State<IntroSlider> {
                   ),
                 ],
               ),
-              Positioned(
-                bottom: 0,
-                right: 0,
+              Align(
+                alignment: Alignment.bottomRight,
                 child: SizedBox(
                   height: constraints.maxHeight * 0.185,
-                  width: constraints.maxWidth * 0.25,
-                  child: SvgPicture.asset(AppImages.nextButtonIntro),
+                  child: Ink(
+                    child: InkWell(
+                      onTap: () {},
+                      child: SvgPicture.asset(
+                        alignment: Alignment(1, 1),
+                        AppImages.nextButtonIntro,
+                      ),
+                    ),
+                  ),
                 ),
               )
             ],
