@@ -6,6 +6,7 @@
   "getStartedScreen_buttonName": "Get Started",
 
   "taskManagement" : "Task Management",
+  "skip" : "Skip",
   "introSlide_1_firstLineText": "Lets create a",
   "introSlide_1_secondLineMarkedText": "Space",
   "introSlide_1_secondLineText": " for your",

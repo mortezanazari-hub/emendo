@@ -116,7 +116,7 @@ class _IntroSliderState extends State<IntroSlider> {
                             child: Row(
                               children: [
                                 TextButton(
-                                    onPressed: () {}, child: Text("Skip")),
+                                    onPressed: () {}, child: Text(localization.skip)),
                               ],
                             ),
                           )
