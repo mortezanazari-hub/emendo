@@ -1,0 +1,23 @@
+{
+  "getStartedScreen_emen": "Emen",
+  "getStartedScreen_do": "Do",
+  "getStartedScreen_title": "Building Better WorkPlaces",
+  "getStartedScreen_subTitle": "Create a unique emotional story that describes better than words",
+  "getStartedScreen_buttonName": "Get Started",
+
+  "taskManagement" : "Task Management",
+  "introSlide_1_firstLineText": "Lets create a",
+  "introSlide_1_secondLineMarkedText": "Space",
+  "introSlide_1_secondLineText": " for your",
+  "introSlide_1_thirdLineText": "workflows",
+
+  "introSlide_2_firstLineText": "ٌWork more",
+  "introSlide_2_secondLineMarkedText": "Structure",
+  "introSlide_2_secondLineText": " and",
+  "introSlide_2_thirdLineText": "Organized",
+
+  "introSlide_3_firstLineText": "Manage your",
+  "introSlide_3_secondLineMarkedText": "Tasks",
+  "introSlide_3_secondLineText": " quickly for",
+  "introSlide_3_thirdLineText": "Results"
+}

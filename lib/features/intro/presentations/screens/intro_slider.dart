@@ -6,6 +6,8 @@ import 'package:emendo/core/configs/app_images.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class IntroSlider extends StatefulWidget {
   const IntroSlider({super.key});
@@ -26,6 +28,7 @@ class _IntroSliderState extends State<IntroSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
         return SizedBox(
@@ -50,26 +53,26 @@ class _IntroSliderState extends State<IntroSlider> {
                         IntroPageSlide(
                           constraints: constraints,
                           index: 1,
-                          firstLineText: "Lets create a",
-                          secondLineMarkedText: "Space",
-                          secondLineText: " for your",
-                          thirdLineText: "workflows",
+                          firstLineText: localization.introSlide_1_firstLineText,
+                          secondLineMarkedText: localization.introSlide_1_secondLineMarkedText,
+                          secondLineText: localization.introSlide_1_secondLineText,
+                          thirdLineText: localization.introSlide_1_thirdLineText,
                         ),
                         IntroPageSlide(
                           constraints: constraints,
                           index: 2,
-                          firstLineText: "ٌWork more",
-                          secondLineMarkedText: "Structure",
-                          secondLineText: " and",
-                          thirdLineText: "Organized",
+                          firstLineText: localization.introSlide_2_firstLineText,
+                          secondLineMarkedText: localization.introSlide_2_secondLineMarkedText,
+                          secondLineText: localization.introSlide_2_secondLineText,
+                          thirdLineText: localization.introSlide_2_thirdLineText,
                         ),
                         IntroPageSlide(
                           constraints: constraints,
                           index: 3,
-                          firstLineText: "Manage your",
-                          secondLineMarkedText: "Tasks",
-                          secondLineText: " quickly for",
-                          thirdLineText: "Results",
+                          firstLineText: localization.introSlide_3_firstLineText,
+                          secondLineMarkedText: localization.introSlide_3_secondLineMarkedText,
+                          secondLineText: localization.introSlide_3_secondLineText,
+                          thirdLineText: localization.introSlide_3_thirdLineText,
                         ),
                       ],
                     ),
@@ -79,7 +82,8 @@ class _IntroSliderState extends State<IntroSlider> {
                   Flexible(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.07),
+                          horizontal: constraints.maxWidth * 0.07
+                      ),
                       child: Column(
                         children: [
                           //SizedBox(height: constraints.maxHeight * 0.015),
@@ -165,6 +169,8 @@ class IntroPageSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Column(
       children: [
         Container(
@@ -191,7 +197,7 @@ class IntroPageSlide extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "Task Management",
+                      localization.taskManagement,
                       style: AppTextStyles.base(
                         context: context,
                         color: context.isDarkMode

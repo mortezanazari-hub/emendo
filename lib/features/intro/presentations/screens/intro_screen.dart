@@ -2,10 +2,12 @@ import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_images.dart';
 import 'package:emendo/features/intro/presentations/screens/intro_slider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:emendo/common/widgets/app_buttons.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -17,6 +19,7 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -73,11 +76,13 @@ class _IntroScreenState extends State<IntroScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Emen",
+                                ///Emen
+                                localization.getStartedScreen_emen,
                                 style: AppTextStyles.logoBase(context: context),
                               ),
                               Text(
-                                " Do",
+                                ///Do
+                                " ${localization.getStartedScreen_do}",
                                 style: AppTextStyles.logoBase(
                                   context: context,
                                   color: context.isDarkMode
@@ -88,7 +93,8 @@ class _IntroScreenState extends State<IntroScreen> {
                             ],
                           ),
                           Text(
-                            "Building Better Workplaces ",
+                            ///Building Better Workplaces
+                            localization.getStartedScreen_title,
                             style: AppTextStyles.base(
                                 context: context,
                                 color: context.isDarkMode
@@ -99,7 +105,8 @@ class _IntroScreenState extends State<IntroScreen> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "Create a unique emotional story that describes better than words ",
+                            ///Create a unique emotional story that describes better than words
+                            localization.getStartedScreen_subTitle,
                             style: AppTextStyles.base(
                                 context: context,
                                 fontSize: 13,
@@ -117,7 +124,8 @@ class _IntroScreenState extends State<IntroScreen> {
                                   MaterialPageRoute(
                                       builder: (context) => IntroSlider()));
                             },
-                            text: "Started",
+                            ///Get Started
+                            text: localization.getStartedScreen_buttonName,
                           ),
                         ],
                       ),
