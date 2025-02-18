@@ -1,24 +1,15 @@
 {
-  "getStartedScreen_emen": "Emen",
-  "getStartedScreen_do": "Do",
-  "getStartedScreen_title": "Building Better WorkPlaces",
-  "getStartedScreen_subTitle": "Create a unique emotional story that describes better than words",
-  "getStartedScreen_buttonName": "Get Started",
-
-  "taskManagement" : "Task Management",
-  "skip" : "Skip",
-  "introSlide_1_firstLineText": "Lets create a",
-  "introSlide_1_secondLineMarkedText": "Space",
-  "introSlide_1_secondLineText": " for your",
-  "introSlide_1_thirdLineText": "workflows",
-
-  "introSlide_2_firstLineText": "ٌWork more",
-  "introSlide_2_secondLineMarkedText": "Structure",
-  "introSlide_2_secondLineText": " and",
-  "introSlide_2_thirdLineText": "Organized",
-
-  "introSlide_3_firstLineText": "Manage your",
-  "introSlide_3_secondLineMarkedText": "Tasks",
-  "introSlide_3_secondLineText": " quickly for",
-  "introSlide_3_thirdLineText": "Results"
+  "getStartedScreen_emen": "اِمِن",
+  "getStartedScreen_do": "دو",
+  "getStartedScreen_title": "یک ورک اسپیس بهتری بساز",
+  "getStartedScreen_subTitle": "این یک شعار فارسی هست که میتونیم برای نمایش شعار نرم افزار خودمون استفاده کنیم",
+  "getStartedScreen_buttonName": "بزن بریم",
+  "taskManagement": "مدیریت کارها",
+  "skip": "صرف نظر کردن",
+  "introSlide_1_text": "بیاین برای شما یک فضای کاری درست کنیم",
+  "introSlide_1_highlightedWord": "فضای",
+  "introSlide_2_text": " با ما ساختارمندتر و سازمان یافته تر کار کنید\n",
+  "introSlide_2_highlightedWord": "ساختارمندتر",
+  "introSlide_3_text": "وظایف خود را به سرعت برای نتایج مدیریت کنید✌",
+  "introSlide_3_highlightedWord": "وظایف"
 }

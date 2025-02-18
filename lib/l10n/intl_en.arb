@@ -7,18 +7,10 @@
 
   "taskManagement" : "Task Management",
   "skip" : "Skip",
-  "introSlide_1_firstLineText": "Lets create a",
-  "introSlide_1_secondLineMarkedText": "Space",
-  "introSlide_1_secondLineText": " for your",
-  "introSlide_1_thirdLineText": "workflows",
-
-  "introSlide_2_firstLineText": "Work more",
-  "introSlide_2_secondLineMarkedText": "Structure",
-  "introSlide_2_secondLineText": " and",
-  "introSlide_2_thirdLineText": "Organized",
-
-  "introSlide_3_firstLineText": "Manage your",
-  "introSlide_3_secondLineMarkedText": "Tasks",
-  "introSlide_3_secondLineText": " quickly for",
-  "introSlide_3_thirdLineText": "Results"
+  "introSlide_1_text": "Let's create a space for your workflows.",
+  "introSlide_1_highlightedWord": "Space",
+  "introSlide_2_text": "Work more Structured and Organized ",
+  "introSlide_2_highlightedWord": "Structured",
+  "introSlide_3_text": "Manage your Tasks quickly for Results✌",
+  "introSlide_3_highlightedWord": "Tasks"
 }

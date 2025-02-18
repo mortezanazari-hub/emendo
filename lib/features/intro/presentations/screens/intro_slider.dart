@@ -1,4 +1,4 @@
-
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
@@ -40,7 +40,7 @@ class _IntroSliderState extends State<IntroSlider> {
                 children: [
                   ///page view
                   SizedBox(
-                    height: constraints.maxHeight * 0.85,
+                    height: constraints.maxHeight * 0.88,
                     child: PageView(
                       scrollDirection: Axis.horizontal,
                       onPageChanged: (index) {
@@ -53,26 +53,23 @@ class _IntroSliderState extends State<IntroSlider> {
                         IntroPageSlide(
                           constraints: constraints,
                           index: 1,
-                          firstLineText: localization.introSlide_1_firstLineText,
-                          secondLineMarkedText: localization.introSlide_1_secondLineMarkedText,
-                          secondLineText: localization.introSlide_1_secondLineText,
-                          thirdLineText: localization.introSlide_1_thirdLineText,
+                          text: localization.introSlide_1_text,
+                          highlightedWord:
+                              localization.introSlide_1_highlightedWord,
                         ),
                         IntroPageSlide(
                           constraints: constraints,
                           index: 2,
-                          firstLineText: localization.introSlide_2_firstLineText,
-                          secondLineMarkedText: localization.introSlide_2_secondLineMarkedText,
-                          secondLineText: localization.introSlide_2_secondLineText,
-                          thirdLineText: localization.introSlide_2_thirdLineText,
+                          text: localization.introSlide_2_text,
+                          highlightedWord:
+                              localization.introSlide_2_highlightedWord,
                         ),
                         IntroPageSlide(
                           constraints: constraints,
                           index: 3,
-                          firstLineText: localization.introSlide_3_firstLineText,
-                          secondLineMarkedText: localization.introSlide_3_secondLineMarkedText,
-                          secondLineText: localization.introSlide_3_secondLineText,
-                          thirdLineText: localization.introSlide_3_thirdLineText,
+                          text: localization.introSlide_3_text,
+                          highlightedWord:
+                              localization.introSlide_3_highlightedWord,
                         ),
                       ],
                     ),
@@ -127,15 +124,23 @@ class _IntroSliderState extends State<IntroSlider> {
                 ],
               ),
               Align(
-                alignment: Alignment.bottomRight,
+                alignment: context.isRtl
+                    ? Alignment.bottomLeft
+                    : Alignment.bottomRight,
                 child: SizedBox(
                   height: constraints.maxHeight * 0.185,
                   child: Ink(
                     child: InkWell(
                       onTap: () {},
-                      child: SvgPicture.asset(
-                        alignment: Alignment(1, 1),
-                        AppImages.nextButtonIntro,
+                      child: Transform(
+                        alignment: Alignment.center,
+                        transform: context.isRtl
+                            ? (Matrix4.identity()..scale(-1.0, 1.0, 1.0))
+                            : (Matrix4.identity()..scale(1.0, 1.0, 1.0)),
+                        child: SvgPicture.asset(
+                          alignment: Alignment(1, 1),
+                          AppImages.nextButtonIntro,
+                        ),
                       ),
                     ),
                   ),
@@ -143,7 +148,10 @@ class _IntroSliderState extends State<IntroSlider> {
               ),
               Positioned(
                   bottom: constraints.maxHeight * 0.07,
-                  right: constraints.maxWidth * 0.05,
+                  right: context.isRtl
+                      ? (constraints.maxWidth * 0.89)
+                      : (constraints.maxWidth * 0.05),
+                  // left: context.isRtl ? (constraints.maxWidth * 0.05) : 0,
                   child: Icon(
                     Icons.arrow_forward_rounded,
                     color: context.isDarkMode
@@ -161,19 +169,15 @@ class _IntroSliderState extends State<IntroSlider> {
 class IntroPageSlide extends StatelessWidget {
   final BoxConstraints constraints;
   final int index;
-  final String firstLineText;
-  final String secondLineMarkedText;
-  final String secondLineText;
-  final String thirdLineText;
+  final String text;
+  final String highlightedWord;
 
   const IntroPageSlide({
     super.key,
     required this.constraints,
     required this.index,
-    required this.firstLineText,
-    required this.secondLineMarkedText,
-    required this.secondLineText,
-    required this.thirdLineText,
+    required this.text,
+    required this.highlightedWord,
   });
 
   @override
@@ -183,7 +187,7 @@ class IntroPageSlide extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: constraints.maxHeight * 0.55,
+          height: constraints.maxHeight * 0.5,
           width: double.infinity,
           decoration: BoxDecoration(
             color:
@@ -225,61 +229,9 @@ class IntroPageSlide extends StatelessWidget {
               Row(
                 children: [
                   Flexible(
-                    child: Text(
-                      firstLineText,
-                      style: AppTextStyles.base(
-                        context: context,
-                        color: context.isDarkMode
-                            ? DarkColors.mainText
-                            : LightColors.mainText,
-                        fontSize: 35,
-                        // fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              //second line text
-              Row(
-                children: [
-                  Text(
-                    secondLineMarkedText,
-                    style: AppTextStyles.base(
-                      context: context,
-                      color: context.isDarkMode
-                          ? DarkColors.primeColor
-                          : LightColors.primeColor,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    secondLineText,
-                    style: AppTextStyles.base(
-                      context: context,
-                      color: context.isDarkMode
-                          ? DarkColors.mainText
-                          : LightColors.mainText,
-                      fontSize: 35,
-                      // fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              //third line text
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      thirdLineText,
-                      style: AppTextStyles.base(
-                        context: context,
-                        color: context.isDarkMode
-                            ? DarkColors.mainText
-                            : LightColors.mainText,
-                        fontSize: 35,
-                        // fontWeight: FontWeight.bold,
-                      ),
+                    child: HighlightWordText(
+                      text: text,
+                      highlightWord: highlightedWord,
                     ),
                   ),
                 ],
@@ -288,6 +240,56 @@ class IntroPageSlide extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class HighlightWordText extends StatelessWidget {
+  final String text;
+  final String highlightWord;
+
+  const HighlightWordText({
+    super.key,
+    required this.text,
+    required this.highlightWord,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle normalStyle = AppTextStyles.base(
+      context: context,
+      color: context.isDarkMode ? DarkColors.mainText : LightColors.mainText,
+      fontSize: 35,
+      // fontWeight: FontWeight.bold,
+    );
+    TextStyle highlightStyle = AppTextStyles.base(
+      context: context,
+      color:
+          context.isDarkMode ? DarkColors.primeColor : LightColors.primeColor,
+      fontSize: 35,
+      fontWeight: FontWeight.bold,
+    );
+
+    List<TextSpan> spans = [];
+
+    text.splitMapJoin(
+      RegExp(highlightWord, caseSensitive: false),
+      onMatch: (match) {
+        spans.add(TextSpan(text: match[0], style: highlightStyle));
+        return '';
+      },
+      onNonMatch: (nonMatch) {
+        spans.add(TextSpan(text: nonMatch, style: normalStyle));
+        return '';
+      },
+    );
+
+    return AutoSizeText.rich(
+      TextSpan(children: spans),
+      style: normalStyle,
+      minFontSize: 20, // Set a minimum font size
+      maxLines: 3, // Allow text to wrap to the next line
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

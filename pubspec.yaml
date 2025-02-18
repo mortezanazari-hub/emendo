@@ -39,6 +39,7 @@ dependencies:
   intl: any
   dots_indicator: ^4.0.0
   flutter_svg: ^2.0.17
+  auto_size_text: ^3.0.0
 
 
 dev_dependencies:

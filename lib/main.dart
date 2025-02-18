@@ -19,6 +19,8 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     final isRtl = AppState.of(context).isRtl;
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        locale: isRtl ? const Locale('ar', 'SA') : const Locale('en', 'US'),
+        locale: isRtl ? const Locale('fa', 'IR') : const Locale('en', 'US'),
         theme: AppTheme.getTheme(isDark: context.isDarkMode),
         darkTheme: AppTheme.getTheme(isDark: context.isDarkMode),
         debugShowCheckedModeBanner: false,
