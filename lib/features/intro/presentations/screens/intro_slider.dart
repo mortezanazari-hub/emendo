@@ -7,7 +7,7 @@ import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:emendo/common/extensions/context_extensions.dart';
 
 class IntroSlider extends StatefulWidget {
   const IntroSlider({super.key});
@@ -140,7 +140,16 @@ class _IntroSliderState extends State<IntroSlider> {
                     ),
                   ),
                 ),
-              )
+              ),
+              Positioned(
+                  bottom: constraints.maxHeight * 0.07,
+                  right: constraints.maxWidth * 0.05,
+                  child: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: context.isDarkMode
+                        ? DarkColors.bgColor
+                        : LightColors.bgColor,
+                  ))
             ],
           ),
         );
@@ -198,6 +207,8 @@ class IntroPageSlide extends StatelessWidget {
                   Flexible(
                     child: Text(
                       localization.taskManagement,
+                      textDirection:
+                          context.isRtl ? TextDirection.rtl : TextDirection.ltr,
                       style: AppTextStyles.base(
                         context: context,
                         color: context.isDarkMode
