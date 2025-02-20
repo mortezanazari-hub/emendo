@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _showDeveloperTextAfterDelay() {
-    Future.delayed(const Duration(milliseconds: 2350), () {
+    Future.delayed(const Duration(milliseconds: 2500), () {
       if (mounted) {
         setState(() {
           _showDeveloperText = true;
@@ -106,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Spacer(),
             AnimatedOpacity(
-              duration: const Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 1000),
               opacity: _showDeveloperText ? 1.0 : 0.0,
               child: Directionality(
                 textDirection: TextDirection.ltr,
