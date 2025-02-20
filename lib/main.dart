@@ -1,6 +1,7 @@
 import 'package:emendo/common/helper/app_state.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_theme.dart';
+import 'package:emendo/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'features/intro/presentations/screens/intro_screen.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await setUpGetIt();
 
   runApp(
     AppState(
