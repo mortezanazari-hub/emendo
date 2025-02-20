@@ -1,9 +1,11 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
+import 'package:emendo/common/helper/shared_operator.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_images.dart';
 import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
 import 'package:emendo/features/intro/presentations/widgets/intro_page_slide.dart';
+import 'package:emendo/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +21,7 @@ class IntroSlider extends StatefulWidget {
 class _IntroSliderState extends State<IntroSlider> {
   final PageController _pageController = PageController();
   double _currentIndex = 0.0;
+  bool getStart = false;
 
   @override
   void dispose() {
@@ -132,12 +135,16 @@ class _IntroSliderState extends State<IntroSlider> {
                   child: Ink(
                     child: InkWell(
                       onTap: () {
-                        context.setIsFirstTime(true);
-
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterScreen()));
+                          if(_pageController.page!.toInt() < 2){
+                            _pageController.animateToPage(_pageController.page!.toInt() + 1, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                          } if(_pageController.page!.toInt() == 1){
+                            setState(() {
+                              getStart = true;
+                            });
+                          } if (_pageController.page!.toInt() == 2){
+                            locator<SharedPrefOperator>().saveIntroState();
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => RegisterScreen(),), (route) => false,);
+                          }
                       },
                       child: Transform(
                         alignment: Alignment.center,

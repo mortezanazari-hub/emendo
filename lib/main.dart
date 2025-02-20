@@ -1,7 +1,6 @@
 import 'package:emendo/common/helper/app_state.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_theme.dart';
-import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'features/intro/presentations/screens/intro_screen.dart';
@@ -40,7 +39,7 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.getTheme(isDark: context.isDarkMode),
         darkTheme: AppTheme.getTheme(isDark: context.isDarkMode),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: IntroScreen(),
       ),
     );
   }
