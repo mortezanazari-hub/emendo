@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_images.dart';
+import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
 import 'package:emendo/features/intro/presentations/widgets/intro_page_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -130,7 +131,14 @@ class _IntroSliderState extends State<IntroSlider> {
                   height: constraints.maxHeight * 0.185,
                   child: Ink(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        context.setIsFirstTime(true);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterScreen()));
+                      },
                       child: Transform(
                         alignment: Alignment.center,
                         transform: context.isRtl
@@ -151,11 +159,20 @@ class _IntroSliderState extends State<IntroSlider> {
                       ? (constraints.maxWidth * 0.89)
                       : (constraints.maxWidth * 0.05),
                   // left: context.isRtl ? (constraints.maxWidth * 0.05) : 0,
-                  child: Icon(
-                    Icons.arrow_forward_rounded,
-                    color: context.isDarkMode
-                        ? DarkColors.bgColor
-                        : LightColors.bgColor,
+                  child: InkWell(
+                    onTap: () {
+                      context.setIsFirstTime(true);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterScreen()));
+                    },
+                    child: Icon(
+                      Icons.arrow_forward_rounded,
+                      color: context.isDarkMode
+                          ? DarkColors.bgColor
+                          : LightColors.bgColor,
+                    ),
                   ))
             ],
           ),

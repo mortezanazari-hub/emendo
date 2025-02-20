@@ -1,5 +1,7 @@
+import 'package:emendo/common/extensions/context_extensions.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_images.dart';
+import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
 import 'package:emendo/features/intro/presentations/screens/intro_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:emendo/common/widgets/app_buttons.dart';
@@ -17,9 +19,41 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
+  bool _isLoading = true;
+  bool? _isFirstTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstTime();
+  }
+
+  Future<void> _checkFirstTime() async {
+    bool? isFirstTime = await context.isFirstTime;
+    setState(() {
+      _isFirstTime = isFirstTime;
+      _isLoading = false;
+    });
+    if (_isFirstTime == true) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterScreen()),
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context)!;
+    if (_isLoading) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {

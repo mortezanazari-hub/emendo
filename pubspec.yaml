@@ -40,6 +40,7 @@ dependencies:
   dots_indicator: ^4.0.0
   flutter_svg: ^2.0.17
   auto_size_text: ^3.0.0
+  shared_preferences: ^2.5.2
 
 
 dev_dependencies:
