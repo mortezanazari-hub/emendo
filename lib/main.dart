@@ -5,8 +5,6 @@ import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:emendo/common/helper/navigation_service.dart';
 
-import 'package:emendo/common/helper/navigation_service.dart';
-import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
 import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
 import 'package:emendo/features/intro/presentations/screens/intro_screen.dart';
 
