@@ -1,3 +1,5 @@
+import 'package:emendo/common/helper/app_state.dart';
+import 'package:emendo/common/helper/navigation_service.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +21,26 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    _calculateState();
     _animateLogo();
     _showDeveloperTextAfterDelay();
   }
 
+  ///culculators void
+  Future<void> _calculateState() async {
+    bool? isFirstLunch = await AppState.isFirstTime;
+    await Future.delayed(const Duration(milliseconds: 2300));
+
+    if (isFirstLunch == true) {
+      await NavigationService.navigateTo('/register');
+    } else {
+      await NavigationService.navigateTo('/intro');
+    }
+  }
+
+  ///animations
   void _animateLogo() {
-    Future.delayed(const Duration(milliseconds: 100), () {
+    Future.delayed(const Duration(milliseconds: 0), () {
       setState(() {
         _size = 200;
       });
@@ -34,8 +50,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _animateLetters() {
     for (int i = 0; i < _letters.length; i++) {
-      Future.delayed(
-          Duration(milliseconds: 1000 + i * (900 ~/ _letters.length)), () {
+      Future.delayed(Duration(milliseconds: 500 + i * (480 ~/ _letters.length)),
+          () {
         if (mounted) {
           setState(() {
             _visible[i] = true;
@@ -49,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _changeDoColor() {
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 300), () {
       if (mounted) {
         setState(() {
           _changeColor = true;
@@ -59,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _showDeveloperTextAfterDelay() {
-    Future.delayed(const Duration(milliseconds: 2500), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       if (mounted) {
         setState(() {
           _showDeveloperText = true;
@@ -75,9 +91,10 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 100),
             Spacer(),
             AnimatedContainer(
-              duration: const Duration(milliseconds: 750),
+              duration: const Duration(milliseconds: 400),
               height: _size,
               child: Image.asset('assets/images/logo.png'),
             ),
@@ -89,10 +106,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: List.generate(
                   _letters.length,
                   (index) => AnimatedOpacity(
-                    duration: const Duration(milliseconds: 10),
+                    duration: const Duration(milliseconds: 150),
                     opacity: _visible[index] ? 1.0 : 0.0,
                     child: AnimatedDefaultTextStyle(
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 300),
                       style: AppTextStyles.logoBase(context: context).copyWith(
                         color: (index >= _letters.length - 2 && _changeColor)
                             ? LightColors.primeColor
@@ -106,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Spacer(),
             AnimatedOpacity(
-              duration: const Duration(milliseconds: 1000),
+              duration: const Duration(milliseconds: 600),
               opacity: _showDeveloperText ? 1.0 : 0.0,
               child: Directionality(
                 textDirection: TextDirection.ltr,
@@ -117,13 +134,20 @@ class _SplashScreenState extends State<SplashScreen> {
                     Text(
                       "App developed by ",
                       style: AppTextStyles.base(
-                          context: context, color: LightColors.thirdText),
+                        context: context,
+                        color: LightColors.thirdText,
+                        fontSize: 10,
+                      ),
                     ),
                     Text(
                       "EmenSoft",
                       style: AppTextStyles.base(
-                          context: context, color: LightColors.secondText),
+                        context: context,
+                        color: LightColors.secondText,
+                        fontSize: 10,
+                      ),
                     ),
+                    SizedBox(height: 100)
                   ],
                 ),
               ),

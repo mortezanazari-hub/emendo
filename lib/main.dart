@@ -3,6 +3,13 @@ import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/core/configs/app_theme.dart';
 import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:emendo/common/helper/navigation_service.dart';
+
+import 'package:emendo/common/helper/navigation_service.dart';
+import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
+import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
+import 'package:emendo/features/intro/presentations/screens/intro_screen.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -16,6 +23,9 @@ Future<void> main() async {
       child: MyApp(),
     ),
   );
+
+  // Initialize navigation service
+  NavigationService.navigatorKey = GlobalKey<NavigatorState>();
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +49,13 @@ class MyApp extends StatelessWidget {
         theme: AppTheme.getTheme(isDark: context.isDarkMode),
         darkTheme: AppTheme.getTheme(isDark: context.isDarkMode),
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        navigatorKey: NavigationService.navigatorKey,
+        initialRoute: '/splash',
+        routes: {
+          '/splash': (context) => const SplashScreen(),
+          '/register': (context) => const RegisterScreen(),
+          '/intro': (context) => const IntroScreen(),
+        },
       ),
     );
   }
