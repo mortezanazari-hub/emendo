@@ -46,9 +46,4 @@ app.*.map.json
 #/android/app/release
 /.dart_tool/
 /.idea/
-/ios/
-/linux/
-/web/
 /test/
-gradle.properties
-analysis_options.yaml
