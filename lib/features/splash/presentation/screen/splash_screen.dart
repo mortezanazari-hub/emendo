@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   ///culculators void
   Future<void> _calculateState() async {
     bool? isFirstLunch = await AppState.isFirstTime;
-    await Future.delayed(const Duration(milliseconds: 2300));
+    await Future.delayed(const Duration(milliseconds: 2800));
 
     if (isFirstLunch == true) {
       await NavigationService.navigateTo('/register');
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   ///animations
   void _animateLogo() {
-    Future.delayed(const Duration(milliseconds: 0), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
         _size = 200;
       });
