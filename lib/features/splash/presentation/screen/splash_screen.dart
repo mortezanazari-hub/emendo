@@ -1,8 +1,12 @@
-import 'package:emendo/common/helper/app_state.dart';
-import 'package:emendo/common/helper/navigation_service.dart';
+import 'package:emendo/core/configs/Assets.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../common/helper/shared_operator.dart';
+import '../../../../locator.dart';
+import '../../../auth/presentation/screens/register_screen.dart';
+import '../../../intro/presentations/screens/intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,21 +25,20 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _calculateState();
+    goToNextScreen();
     _animateLogo();
     _showDeveloperTextAfterDelay();
   }
 
-  ///culculators void
-  Future<void> _calculateState() async {
-    bool? isFirstLunch = await AppState.isFirstTime;
-    await Future.delayed(const Duration(milliseconds: 2300));
+  void goToNextScreen() async{
+    var introState = locator<SharedPrefOperator>().getIntroState();
 
-    if (isFirstLunch == true) {
-      await NavigationService.navigateTo('/register');
-    } else {
-      await NavigationService.navigateTo('/intro');
-    }
+      await Future.delayed(Duration(seconds: 2));
+      if (introState) {
+        if(mounted)Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => IntroScreen(),));
+      } else {
+        if(mounted)Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterScreen(),));
+      }
   }
 
   ///animations
@@ -51,16 +54,16 @@ class _SplashScreenState extends State<SplashScreen> {
   void _animateLetters() {
     for (int i = 0; i < _letters.length; i++) {
       Future.delayed(Duration(milliseconds: 500 + i * (480 ~/ _letters.length)),
-          () {
-        if (mounted) {
-          setState(() {
-            _visible[i] = true;
+              () {
+            if (mounted) {
+              setState(() {
+                _visible[i] = true;
+              });
+              if (i == _letters.length - 1) {
+                _changeDoColor();
+              }
+            }
           });
-          if (i == _letters.length - 1) {
-            _changeDoColor();
-          }
-        }
-      });
     }
   }
 
@@ -96,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 400),
               height: _size,
-              child: Image.asset('assets/images/logo.png'),
+              child: Image.asset(Assets.logo),
             ),
             const SizedBox(height: 20),
             Directionality(
@@ -105,7 +108,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   _letters.length,
-                  (index) => AnimatedOpacity(
+                      (index) => AnimatedOpacity(
                     duration: const Duration(milliseconds: 150),
                     opacity: _visible[index] ? 1.0 : 0.0,
                     child: AnimatedDefaultTextStyle(
