@@ -1,4 +1,3 @@
-import 'package:emendo/common/extensions/context_extensions.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
