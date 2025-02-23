@@ -1,15 +1,15 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
+import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/common/helper/shared_operator.dart';
+import 'package:emendo/core/configs/Assets.dart';
 import 'package:emendo/core/configs/app_colors.dart';
-import 'package:emendo/core/configs/app_images.dart';
 import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
 import 'package:emendo/features/intro/presentations/widgets/intro_page_slide.dart';
 import 'package:emendo/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:emendo/common/extensions/context_extensions.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class IntroSlider extends StatefulWidget {
   const IntroSlider({super.key});
@@ -19,6 +19,7 @@ class IntroSlider extends StatefulWidget {
 }
 
 class _IntroSliderState extends State<IntroSlider> {
+
   final PageController _pageController = PageController();
   double _currentIndex = 0.0;
   bool getStart = false;
@@ -143,7 +144,10 @@ class _IntroSliderState extends State<IntroSlider> {
                             });
                           } if (_pageController.page!.toInt() == 2){
                             locator<SharedPrefOperator>().saveIntroState();
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => RegisterScreen(),), (route) => false,);
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => RegisterScreen(),),
+                                  (route) => false,);
                           }
                       },
                       child: Transform(
@@ -153,7 +157,7 @@ class _IntroSliderState extends State<IntroSlider> {
                             : (Matrix4.identity()..scale(1.0, 1.0, 1.0)),
                         child: SvgPicture.asset(
                           alignment: Alignment(1, 1),
-                          AppImages.nextButtonIntro,
+                          Assets.nextButtonIntro,
                         ),
                       ),
                     ),
@@ -166,20 +170,11 @@ class _IntroSliderState extends State<IntroSlider> {
                       ? (constraints.maxWidth * 0.89)
                       : (constraints.maxWidth * 0.05),
                   // left: context.isRtl ? (constraints.maxWidth * 0.05) : 0,
-                  child: InkWell(
-                    onTap: () {
-                      context.setIsFirstTime(true);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RegisterScreen()));
-                    },
-                    child: Icon(
-                      Icons.arrow_forward_rounded,
-                      color: context.isDarkMode
-                          ? DarkColors.bgColor
-                          : LightColors.bgColor,
-                    ),
+                  child: Icon(
+                    Icons.arrow_forward_rounded,
+                    color: context.isDarkMode
+                        ? DarkColors.bgColor
+                        : LightColors.bgColor,
                   ))
             ],
           ),

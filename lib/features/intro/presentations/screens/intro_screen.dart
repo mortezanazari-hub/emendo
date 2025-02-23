@@ -1,7 +1,7 @@
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/common/widgets/app_buttons.dart';
 import 'package:emendo/core/configs/app_colors.dart';
-import 'package:emendo/core/configs/app_images.dart';
+import 'package:emendo/core/configs/Assets.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:emendo/features/intro/presentations/screens/intro_slider.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final localization = AppLocalizations.of(context)!;
 
     return Scaffold(
@@ -23,7 +24,7 @@ class IntroScreen extends StatelessWidget {
               Column(
                 children: [
                   Image.asset(
-                    AppImages.getStartScreen,
+                    Assets.getStartScreen,
                     width: double.infinity,
                     height: constraints.maxHeight * 0.50,
                     fit: BoxFit.cover,
@@ -41,7 +42,7 @@ class IntroScreen extends StatelessWidget {
                 left: 20,
                 child: SafeArea(
                   child: Image.asset(
-                    AppImages.miniLogo,
+                    Assets.miniLogo,
                     height: 30,
                   ),
                 ),
@@ -114,10 +115,9 @@ class IntroScreen extends StatelessWidget {
                           AppButtons.primaryBold(
                             context: context,
                             onPressed: () {
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(
-                                      builder: (context) => IntroSlider()));
+                                  MaterialPageRoute(builder: (context) => IntroSlider(),));
                             },
                             ///Get Started
                             text: localization.getStartedScreen_buttonName,

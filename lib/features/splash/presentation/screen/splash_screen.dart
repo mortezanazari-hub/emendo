@@ -1,8 +1,12 @@
-import 'package:emendo/common/helper/app_state.dart';
-import 'package:emendo/common/helper/navigation_service.dart';
+import 'package:emendo/common/helper/shared_operator.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
+import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
+import 'package:emendo/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../intro/presentations/screens/intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -21,26 +25,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _calculateState();
+    goToNextScreen();
     _animateLogo();
     _showDeveloperTextAfterDelay();
   }
 
-  ///culculators void
-  Future<void> _calculateState() async {
-    bool? isFirstLunch = await AppState.isFirstTime;
-    await Future.delayed(const Duration(milliseconds: 2800));
-
-    if (isFirstLunch == true) {
-      await NavigationService.navigateTo('/register');
+  Future<void> goToNextScreen() async {
+    var introState = locator<SharedPrefOperator>().getIntroState();
+    await Future.delayed(Duration(seconds: 2));
+    if (introState) {
+      if(mounted)Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => IntroScreen(),));
     } else {
-      await NavigationService.navigateTo('/intro');
+      if(mounted)Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterScreen(),));
     }
   }
 
   ///animations
   void _animateLogo() {
-    Future.delayed(const Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 0), () {
       setState(() {
         _size = 200;
       });

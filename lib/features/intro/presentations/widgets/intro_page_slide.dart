@@ -1,7 +1,7 @@
-import 'package:emendo/common/extensions/context_extensions.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
+import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
-import 'package:emendo/core/configs/app_images.dart';
+import 'package:emendo/core/configs/Assets.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:emendo/features/intro/presentations/widgets/highlight_word_text.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class IntroPageSlide extends StatelessWidget {
                 context.isDarkMode ? DarkColors.bgColor : LightColors.bgColor,
           ),
           child: Image.asset(
-            AppImages.introScreenSlide(index),
+            Assets.introScreenSlide(index),
             fit: BoxFit.fitWidth,
             alignment: Alignment.topCenter,
             isAntiAlias: true,

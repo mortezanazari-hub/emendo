@@ -1,4 +1,4 @@
-class AppImages {
+class Assets {
   static const String basePath = "assets/images/";
 
   static const String getStartScreen = "${basePath}get_start_screen.png";
