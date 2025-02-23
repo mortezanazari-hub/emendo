@@ -4,7 +4,6 @@ import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
 import 'package:emendo/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../intro/presentations/screens/intro_screen.dart';
 
@@ -34,9 +33,21 @@ class _SplashScreenState extends State<SplashScreen> {
     var introState = locator<SharedPrefOperator>().getIntroState();
     await Future.delayed(Duration(seconds: 2));
     if (introState) {
-      if(mounted)Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => IntroScreen(),));
+      if (mounted) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => IntroScreen(),
+            ));
+      }
     } else {
-      if(mounted)Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegisterScreen(),));
+      if (mounted) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RegisterScreen(),
+            ));
+      }
     }
   }
 

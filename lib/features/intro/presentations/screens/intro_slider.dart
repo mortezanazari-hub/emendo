@@ -2,7 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/common/helper/shared_operator.dart';
-import 'package:emendo/core/configs/Assets.dart';
+import 'package:emendo/core/configs/assets.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
 import 'package:emendo/features/intro/presentations/widgets/intro_page_slide.dart';
@@ -19,7 +19,6 @@ class IntroSlider extends StatefulWidget {
 }
 
 class _IntroSliderState extends State<IntroSlider> {
-
   final PageController _pageController = PageController();
   double _currentIndex = 0.0;
   bool getStart = false;
@@ -83,8 +82,7 @@ class _IntroSliderState extends State<IntroSlider> {
                   Flexible(
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.07
-                      ),
+                          horizontal: constraints.maxWidth * 0.07),
                       child: Column(
                         children: [
                           //SizedBox(height: constraints.maxHeight * 0.015),
@@ -117,7 +115,8 @@ class _IntroSliderState extends State<IntroSlider> {
                             child: Row(
                               children: [
                                 TextButton(
-                                    onPressed: () {}, child: Text(localization.skip)),
+                                    onPressed: () {},
+                                    child: Text(localization.skip)),
                               ],
                             ),
                           )
@@ -136,19 +135,27 @@ class _IntroSliderState extends State<IntroSlider> {
                   child: Ink(
                     child: InkWell(
                       onTap: () {
-                          if(_pageController.page!.toInt() < 2){
-                            _pageController.animateToPage(_pageController.page!.toInt() + 1, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-                          } if(_pageController.page!.toInt() == 1){
-                            setState(() {
-                              getStart = true;
-                            });
-                          } if (_pageController.page!.toInt() == 2){
-                            locator<SharedPrefOperator>().saveIntroState();
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => RegisterScreen(),),
-                                  (route) => false,);
-                          }
+                        if (_pageController.page!.toInt() < 2) {
+                          _pageController.animateToPage(
+                              _pageController.page!.toInt() + 1,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut);
+                        }
+                        if (_pageController.page!.toInt() == 1) {
+                          setState(() {
+                            getStart = true;
+                          });
+                        }
+                        if (_pageController.page!.toInt() == 2) {
+                          locator<SharedPrefOperator>().saveIntroState();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegisterScreen(),
+                            ),
+                            (route) => false,
+                          );
+                        }
                       },
                       child: Transform(
                         alignment: Alignment.center,
@@ -183,5 +190,3 @@ class _IntroSliderState extends State<IntroSlider> {
     );
   }
 }
-
-

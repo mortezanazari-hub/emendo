@@ -1,7 +1,7 @@
 import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
-import 'package:emendo/core/configs/Assets.dart';
+import 'package:emendo/core/configs/assets.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
 import 'package:emendo/features/intro/presentations/widgets/highlight_word_text.dart';
 import 'package:flutter/material.dart';
