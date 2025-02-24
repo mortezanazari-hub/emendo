@@ -11,5 +11,38 @@
   "introSlide_2_text": " با ما ساختارمندتر و سازمان یافته تر کار کنید\n",
   "introSlide_2_highlightedWord": "ساختارمندتر",
   "introSlide_3_text": "وظایف خود را به سرعت برای نتایج مدیریت کنید✌",
-  "introSlide_3_highlightedWord": "وظایف"
+  "introSlide_3_highlightedWord": "وظایف",
+
+
+  "signUp" : "ثبت نام",
+  "signUpTitle" : "ایجاد حساب کاربری",
+  "signUpSubTitle" : "لطفا اطلاعات خود را برای ثبت نام وارد کنید",
+  "signUpWith" : "ثبت نام با",
+  "haveAnAccount" : "حساب کاربری دارید؟",
+
+  "signIn" : "ورود",
+  "signInTitle" : "خوش آمدی",
+  "signInSubTitle" : "لطفا نام کاربری و رمز عبوذ خود را وارد کنید",
+  "forgetPassword" : "رمز خود را فراموش کردید؟",
+  "signInWith" : "ورود با",
+  "noRegisterYet" : "هنوز ثبت نام نکردی؟",
+
+  "forgetPass" : "فراموشی رمز عبور",
+  "forgetPassTitle" : "لطقا کد ارسال شده رو وارد کنید",
+  "forgetPassSubTitle" : "یک کد به آدرس ایمیل شما ارسال شده است. لطفاً آن را وارد کنید.",
+  "resendCode" : "ارسال مجدد کد",
+
+  "editPass" : "ویرایش رمز عبور",
+  "editPassTitle" : "رمز عبور خود را تغییر دهید",
+  "editPassSubTitle" : "برای ویرایش رمز عبور خود، لطفاً اطلاعات زیر را تکمیل کنید",
+  "confirm" : "تأیید",
+
+  "textFields" : "All Of TextField HintText",
+  "userNameHintForTextField": "نام کاربری را وارد کنید",
+  "emailHintForTextField": "ایمیل را وارد کنید",
+  "passwordHintForTextField": "رمز عبور را وارد کنید",
+  "newPasswordHintForTextField": "رمز عبور جدید را وارد کنید",
+  "oldPasswordHintForTextField": "رمز عبور قبلی را وارد کنید",
+  "confirmPasswordHintForTextField": "رمز عبور را تأیید کنید"
+
 }

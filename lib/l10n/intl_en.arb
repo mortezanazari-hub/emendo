@@ -12,5 +12,37 @@
   "introSlide_2_text": "Work more Structured and Organized ",
   "introSlide_2_highlightedWord": "Structured",
   "introSlide_3_text": "Manage your Tasks quickly for Results✌",
-  "introSlide_3_highlightedWord": "Tasks"
+  "introSlide_3_highlightedWord": "Tasks",
+
+  "signUp" : "Sign Up",
+  "signUpTitle" : "Create Account",
+  "signUpSubTitle" : "Please enter your Information and create your account",
+  "signUpWith" : "Signup With",
+  "haveAnAccount" : "Have an Account?",
+
+  "signIn" : "Sign In",
+  "signInTitle" : "Welcome Back",
+  "signInSubTitle" : "Please enter your email address and password for Login",
+  "forgetPassword" : "Forgot Password?",
+  "signInWith" : "Signin with",
+  "noRegisterYet" : "Not Registrar Yet?",
+
+  "forgetPass" : "Forget Password",
+  "forgetPassTitle" : "Please Enter Your Code",
+  "forgetPassSubTitle" : "A code has been sent to your email address. Please enter it.",
+  "resendCode" : "Resend Code",
+
+  "editPass" : "Edit Password",
+  "editPassTitle" : "Edit Your Password",
+  "editPassSubTitle" : "To edit your password, please fill in the following",
+  "confirm" : "Confirm",
+
+  "textFields" : "All Of TextField HintText",
+  "userNameHintForTextField" : "Enter Your UserName",
+  "emailHintForTextField" : "Enter your mail",
+  "passwordHintForTextField" : "Enter your password",
+  "newPasswordHintForTextField" : "Enter your new Password",
+  "oldPasswordHintForTextField" : "Enter your old Password",
+  "confirmPasswordHintForTextField" : "Confirm your password"
+
 }
