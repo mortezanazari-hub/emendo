@@ -1,4 +1,6 @@
-import 'package:emendo/common/helper/is_dark_mode.dart';
+import 'dart:math';
+
+import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -26,11 +28,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
           height: 50,
           width: 50,
           decoration: BoxDecoration(
+            border: Border.all(width: 1,color: Color(0xffE9F1FF)),
             shape: BoxShape.circle,
-            color: context.isDarkMode ? Colors.grey.shade900 : Color(0xffE9F1FF)
+
           ),
           // child: SvgPicture.asset(context.isDarkMode ? Assets.backButtonLight : Assets.backButtonDark,fit: BoxFit.none,),
-          child: SvgPicture.asset(Assets.backButtonDark,fit: BoxFit.none,),
+          child: context.isRtl
+              ? Transform.rotate(angle: pi,child: backButton(),)
+              : backButton(),
 
         ),
       ),
@@ -39,4 +44,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
+}
+Widget backButton (){
+  return SvgPicture.asset(Assets.backButtonDark,fit: BoxFit.none,);
 }
