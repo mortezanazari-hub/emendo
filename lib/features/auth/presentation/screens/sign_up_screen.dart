@@ -62,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 }
 Widget _signUpTitle(AppLocalizations localization,context){
   return Text(
-    localization.signUpTitle.toString() ?? "a",
+    localization.signUpTitle,
     style: AppTextStyles.base(
       context: context,
       fontSize: 30,
