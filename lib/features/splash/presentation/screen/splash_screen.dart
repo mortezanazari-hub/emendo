@@ -1,7 +1,7 @@
 import 'package:emendo/common/helper/shared_operator.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
-import 'package:emendo/features/auth/presentation/screens/register_screen.dart';
+import 'package:emendo/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:emendo/locator.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => RegisterScreen(),
+              builder: (context) => SignUpScreen(),
             ));
       }
     }

@@ -1,4 +1,5 @@
 import 'package:emendo/core/configs/app_theme.dart';
+import 'package:emendo/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'locator.dart';
 
 Future<void> main() async {
+  await setUpGetIt();
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(
@@ -19,7 +21,6 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
   ]);
 
-  await setUpGetIt();
 
 }
 
@@ -38,11 +39,11 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale('fa', 'IR'),
+      locale: const Locale('en', 'IR'),
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme(),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: SignUpScreen(),
     );
   }
 }

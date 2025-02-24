@@ -2,19 +2,13 @@ import 'package:emendo/core/configs/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static ThemeData getTheme({required bool isDark}) {
-    return isDark ? darkTheme() : lightTheme();
-  }
-
-  static TextDirection getTextDirection(bool isRtl) {
-    return isRtl ? TextDirection.rtl : TextDirection.ltr;
-  }
 
   ///light
   static ThemeData lightTheme() {
     return ThemeData(
       primaryColor: LightColors.primeColor,
       brightness: Brightness.light,
+
       fontFamily: 'OpenSans',
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
