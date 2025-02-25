@@ -36,7 +36,7 @@ class CustomButton extends StatelessWidget {
   final Color disabledForegroundColor; // text/icon color when disabled
   final Color backgroundColor; // background color
   final Color disabledBackgroundColor; // background color when disabled
-  final Color shadowColor; // shadow color
+  // final Color shadowColor; // shadow color
   final double elevation; // button elevation
   final TextStyle textStyle; // text style
   final EdgeInsetsGeometry padding; // button padding
@@ -67,7 +67,7 @@ class CustomButton extends StatelessWidget {
     this.disabledForegroundColor = Colors.grey,
     this.backgroundColor = Colors.blue,
     this.disabledBackgroundColor = Colors.grey,
-    this.shadowColor = Colors.black,
+    // this.shadowColor = Colors.black,
     this.elevation = 14,
     this.textStyle = const TextStyle(color: Colors.white),
     this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -110,7 +110,10 @@ class CustomButton extends StatelessWidget {
                 disabledForegroundColor: disabledForegroundColor,
                 backgroundColor: backgroundColor,
                 disabledBackgroundColor: disabledBackgroundColor,
-                shadowColor: shadowColor,
+                shadowColor: Colors.black,////////////////
+                //
+                //
+                //
                 elevation: elevation,
                 textStyle: textStyle,
                 padding: padding,
@@ -174,7 +177,7 @@ class CustomButtons {
       height: 48,
       text: text,
       onPressed: onPressed,
-      foregroundColor: isDark ? DarkColors.white : LightColors.white,
+      foregroundColor: isDark ? DarkColors.outLineBorderFocus : LightColors.white,
       backgroundColor: isDark ? DarkColors.primeColor : LightColors.primeColor,
       textStyle:
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

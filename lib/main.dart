@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      locale: const Locale('en', 'IR'),
+      locale: const Locale('fa', 'IR'),
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme(),
       debugShowCheckedModeBanner: false,

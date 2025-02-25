@@ -23,9 +23,8 @@ class CustomFormField extends StatelessWidget {
   final TextStyle style;
   final GestureTapCallback? onTap;
   final FocusNode? focusNode;
-  final VoidCallback? onEditingComplete;
 
-  CustomFormField({
+  const CustomFormField({
     super.key,
     this.onTap,
     this.context,
@@ -37,7 +36,6 @@ class CustomFormField extends StatelessWidget {
     this.prefixIcon,
     required this.validator,
     required this.onSubmit,
-    this.onEditingComplete,
     this.isNumber = false,
     this.maxLength,
     this.focusNode,
@@ -55,7 +53,6 @@ class CustomFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return TextFormField(
-      onEditingComplete: onEditingComplete,
       focusNode: focusNode,
       onTap: onTap,
       maxLines: 1,

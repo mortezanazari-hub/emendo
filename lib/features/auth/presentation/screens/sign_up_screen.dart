@@ -1,4 +1,5 @@
 import 'package:emendo/common/widgets/custom_app_bar.dart';
+import 'package:emendo/common/widgets/custom_button.dart';
 import 'package:emendo/common/widgets/custom_form_field.dart';
 import 'package:emendo/core/configs/Assets.dart';
 import 'package:emendo/core/configs/app_colors.dart';
@@ -78,7 +79,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: constraints.maxHeight / 25),
                         _passwordField(localization,password,passwordFocusNode),
                         SizedBox(height: constraints.maxHeight / 25),
-
+                        CustomButtons.primary(
+                          text: localization.signUp,
+                          context: context,
+                          onPressed: () {},
+                        )
                       ],
                     ),
                   )
