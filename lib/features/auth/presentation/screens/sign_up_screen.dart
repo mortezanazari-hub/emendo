@@ -1,3 +1,4 @@
+import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/common/widgets/custom_app_bar.dart';
 import 'package:emendo/common/widgets/custom_button.dart';
 import 'package:emendo/common/widgets/custom_form_field.dart';
@@ -83,6 +84,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           text: localization.signUp,
                           context: context,
                           onPressed: () {},
+                        ),
+                        SizedBox(height: constraints.maxHeight / 25),
+                        _signUpWithText(localization,context),
+                        SizedBox(height: constraints.maxHeight / 25),
+                        _googleLogo(localization,context),
+                        SizedBox(height: constraints.maxHeight / 25),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(localization.haveAnAccount),
+                            Text(" ${localization.signIn}")
+                          ],
                         )
                       ],
                     ),
@@ -107,7 +120,7 @@ Widget _signUpTitle(AppLocalizations localization,context){
     );
 }
 
-Widget _signUpSubTitle(AppLocalizations localization,context){
+Widget _signUpSubTitle(AppLocalizations localization,BuildContext context){
   return Text(
     localization.signUpSubTitle,
     style: AppTextStyles.base(
@@ -172,4 +185,32 @@ Widget _passwordField (AppLocalizations localization,password,passwordFocusNode)
   );
 }
 
+Widget _signUpWithText(AppLocalizations localization,BuildContext context){
+  return Center(
+    child: Text(
+      localization.signUpWith,
+      style: AppTextStyles.base(
+          context: context,
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+          color: context.isDarkMode ? DarkColors.disableText : LightColors.disableText
+      ),
+    ),
+  );
+}
+
+Widget _googleLogo(AppLocalizations localization,BuildContext context){
+  return Center(
+    child: Container(
+      height: 60,
+      width: 60,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(width: 1, color: LightColors.outLineBorder),
+          color: Colors.white
+      ),
+      child: Center(child: SvgPicture.asset(Assets.googleLogo)),
+    ),
+  );
+}
 
