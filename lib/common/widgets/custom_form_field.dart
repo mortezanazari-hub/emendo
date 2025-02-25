@@ -1,8 +1,14 @@
+import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:emendo/core/configs/app_text_styles.dart';
 
-class CustomTextBox extends StatelessWidget {
+import '../../core/configs/app_colors.dart';
+
+
+class CustomFormField extends StatelessWidget {
   final TextEditingController textEditingController;
+  final BuildContext? context;
   final String hintText;
   final TextInputType keyboardType;
   final bool obscureText;
@@ -13,16 +19,16 @@ class CustomTextBox extends StatelessWidget {
   final EdgeInsets contentPadding;
   final String? Function(String? value)? validator;
   final ValueChanged<String>? onSubmit;
-  final TextStyle hintStyle;
   final Color prefixColor;
   final TextStyle style;
   final GestureTapCallback? onTap;
   final FocusNode? focusNode;
   final VoidCallback? onEditingComplete;
 
-  CustomTextBox({
+  CustomFormField({
     super.key,
     this.onTap,
+    this.context,
     required this.textEditingController,
     required this.hintText,
     this.keyboardType = TextInputType.number,
@@ -36,12 +42,7 @@ class CustomTextBox extends StatelessWidget {
     this.maxLength,
     this.focusNode,
     this.contentPadding =
-        const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-    this.hintStyle = const TextStyle(
-      color: Colors.white,
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-    ),
+        const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
     this.style = const TextStyle(
       color: Colors.white,
       fontSize: 16,
@@ -60,7 +61,7 @@ class CustomTextBox extends StatelessWidget {
       maxLines: 1,
       style: style,
       maxLength: maxLength,
-      inputFormatters: [digitPersianFormatter()],
+      inputFormatters: [DigitPersianFormatter()],
       onFieldSubmitted: onSubmit,
       validator: validator,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -69,16 +70,21 @@ class CustomTextBox extends StatelessWidget {
       controller: textEditingController,
       decoration: InputDecoration(
         counterText: "",
-        hintStyle: hintStyle,
+        hintStyle: AppTextStyles.base(
+            fontSize: 16,
+            color: context.isDarkMode ? DarkColors.hintText : LightColors.hintText,
+            fontWeight: FontWeight.w400,
+            context: context
+        ),
         disabledBorder: InputBorder.none,
-        errorStyle: const TextStyle(height: 0.1, fontSize: 13),
+        // errorStyle: const TextStyle(height: 0.1, fontSize: 13),
         hintMaxLines: 1,
         contentPadding: contentPadding,
-        prefixIcon: Icon(
-          prefixIcon,
-          color: prefixColor,
-          size: 25,
-        ),
+        // prefixIcon: Icon(
+        //   prefixIcon,
+        //   color: prefixColor,
+        //   size: 0,
+        // ),
         suffixIcon: suffixIcon,
         suffixIconColor: themeData.iconTheme.color,
         hintText: hintText,
@@ -87,7 +93,7 @@ class CustomTextBox extends StatelessWidget {
   }
 }
 
-class digitPersianFormatter extends TextInputFormatter {
+class DigitPersianFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
