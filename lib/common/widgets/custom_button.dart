@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:emendo/core/configs/app_text_styles.dart';
 
-class AppBaseButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   ///size of button
   final double? width;
   final double? height;
@@ -53,7 +53,7 @@ class AppBaseButton extends StatelessWidget {
       enableFeedback; // whether detected gestures should provide feedback
   final Alignment alignment; // aligns the child within the button
 
-  const AppBaseButton({
+  const CustomButton({
     super.key,
     required this.text,
     this.onPressed,
@@ -142,14 +142,14 @@ class AppBaseButton extends StatelessWidget {
 
 /// A helper class with static methods to create different styled buttons
 /// using [AppBaseButton].
-class AppButtons {
-  static AppBaseButton primary({
+class CustomButtons {
+  static CustomButton primary({
     required String text,
     required BuildContext context,
     VoidCallback? onPressed,
   }) {
     final isDark = context.isDarkMode;
-    return AppBaseButton(
+    return CustomButton(
       width: 300,
       height: 48,
       text: text,
@@ -161,13 +161,13 @@ class AppButtons {
     );
   }
 
-  static AppBaseButton primaryBold({
+  static CustomButton primaryBold({
     required String text,
     VoidCallback? onPressed,
     required BuildContext context,
   }) {
     final isDark = context.isDarkMode;
-    return AppBaseButton(
+    return CustomButton(
       fontSize: 18,
       fontWeight: FontWeight.w600,
       // width: 300,
