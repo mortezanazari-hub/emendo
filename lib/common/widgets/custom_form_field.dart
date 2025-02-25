@@ -20,7 +20,7 @@ class CustomFormField extends StatelessWidget {
   final String? Function(String? value)? validator;
   final ValueChanged<String>? onSubmit;
   final Color prefixColor;
-  final TextStyle style;
+  // final TextStyle style;
   final GestureTapCallback? onTap;
   final FocusNode? focusNode;
 
@@ -41,11 +41,11 @@ class CustomFormField extends StatelessWidget {
     this.focusNode,
     this.contentPadding =
         const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-    this.style = const TextStyle(
-      color: Colors.white,
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-    ),
+    // this.style = TextStyle(
+    //   color: context.isDarkMode ? DarkColors.white : LightColors.primeColor,
+    //   fontSize: 16,
+    //   fontWeight: FontWeight.w600,
+    // ),
     this.prefixColor = Colors.white54,
   });
 
@@ -56,7 +56,11 @@ class CustomFormField extends StatelessWidget {
       focusNode: focusNode,
       onTap: onTap,
       maxLines: 1,
-      style: style,
+      style: TextStyle(
+        color: context.isDarkMode ? DarkColors.white : LightColors.mainText,
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+      ),
       maxLength: maxLength,
       inputFormatters: [DigitPersianFormatter()],
       onFieldSubmitted: onSubmit,

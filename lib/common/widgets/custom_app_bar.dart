@@ -1,18 +1,21 @@
 import 'dart:math';
-
-import 'package:emendo/common/helper/is_dark_mode.dart';
 import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../core/configs/Assets.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Widget? title;
-  final bool? hideBack;
+  final Widget? leadingWidget;
+  final Widget? actionButton;
   final Color? backGroundColor;
-  const CustomAppBar({super.key,this.title,this.hideBack = false,this.backGroundColor});
+  const CustomAppBar({
+    super.key,
+    this.title,
+    this.leadingWidget,
+    this.actionButton,
+    this.backGroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
         elevation: 0,
         shadowColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        leading: hideBack! ? null : IconButton(
+        leading: leadingWidget ?? IconButton(
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
           onPressed: () => Navigator.pop(context),
