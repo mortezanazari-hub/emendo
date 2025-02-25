@@ -5,6 +5,7 @@ class Assets {
   static const String miniLogo = "${basePath}mini_logo.png";
   static const String nextButtonIntro = "${basePath}next_button_intro.svg";
   static const String backButtonDark = "${basePath}back_button_dark.svg";
+  static const String authCirclesView = "${basePath}auth_circles_view.svg";
 
   static String introScreenSlide(int index) {
     return "assets/images/intro_screen_slide${index.toString()}.png";

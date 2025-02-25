@@ -1,5 +1,5 @@
 import 'package:emendo/common/helper/is_dark_mode.dart';
-import 'package:emendo/common/widgets/app_buttons.dart';
+import 'package:emendo/common/widgets/custom_button.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:emendo/core/configs/assets.dart';
 import 'package:emendo/core/configs/app_text_styles.dart';
@@ -110,7 +110,7 @@ class IntroScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          AppButtons.primaryBold(
+                          CustomButtons.primaryBold(
                             context: context,
                             onPressed: () {
                               Navigator.pushReplacement(

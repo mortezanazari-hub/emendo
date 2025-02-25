@@ -16,7 +16,7 @@
 
   "signUp" : "Sign Up",
   "signUpTitle" : "Create Account",
-  "signUpSubTitle" : "Please enter your Information and create your account",
+  "signUpSubTitle" : "Please enter your Information and\ncreate your account",
   "signUpWith" : "Signup With",
   "haveAnAccount" : "Have an Account?",
 
@@ -38,7 +38,7 @@
   "confirm" : "Confirm",
 
   "textFields" : "All Of TextField HintText",
-  "userNameHintForTextField" : "Enter Your UserName",
+  "userNameHintForTextField" : "Enter your name",
   "emailHintForTextField" : "Enter your mail",
   "passwordHintForTextField" : "Enter your password",
   "newPasswordHintForTextField" : "Enter your new Password",

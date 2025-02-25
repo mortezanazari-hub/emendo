@@ -15,25 +15,28 @@ class AppTheme {
       splashFactory: NoSplash.splashFactory,
       scaffoldBackgroundColor: LightColors.bgColor,
       inputDecorationTheme: InputDecorationTheme(
-        fillColor: Colors.transparent,
-        contentPadding: const EdgeInsets.all(30),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(color: LightColors.outLineBorder)
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: LightColors.outLineBorderFocus,width: 1.5)
         ),
+        contentPadding: const EdgeInsets.all(30),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: LightColors.primeColor, width: 0.4),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: LightColors.outLineBorder, width: 1.5),
+        ),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: LightColors.outLineBorderFocus)
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: LightColors.primeColor, width: 2),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
         ),
-        errorStyle: const TextStyle(color: LightColors.primeColor),
+        errorStyle: const TextStyle(color: LightColors.outLineBorderFocus),
         suffixIconColor: Colors.grey.shade800,
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -57,24 +60,28 @@ class AppTheme {
       focusColor: Colors.transparent,
       scaffoldBackgroundColor: DarkColors.bgColor,
       inputDecorationTheme: InputDecorationTheme(
-        fillColor: Colors.transparent,
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: LightColors.outLineBorderFocus,width: 1.5)
+        ),
         contentPadding: const EdgeInsets.all(30),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: LightColors.outLineBorder)),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: LightColors.primeColor, width: 0.4),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: LightColors.outLineBorder, width: 1.5),
+        ),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: LightColors.outLineBorderFocus)
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide(color: LightColors.primeColor, width: 2),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
         ),
-        errorStyle: const TextStyle(color: LightColors.primeColor),
+        errorStyle: const TextStyle(color: LightColors.outLineBorderFocus),
         suffixIconColor: Colors.grey.shade800,
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(color: Colors.red, width: 1),
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

@@ -14,6 +14,8 @@ class LightColors {
   static const Color thirdText = Color(0xff8D8D8D);
   static const Color disableText = Color(0xff868D95);
   static const Color outLineBorder = Color(0xffE9F1FF);
+  static const Color hintText = Color(0xff848A94);
+  static const Color outLineBorderFocus = Color(0xff756EF3);
 
   static const Color black = Color(0xff000000);
   static const Color white = Color(0xffffffff);
@@ -33,7 +35,8 @@ class DarkColors {
   static const Color thirdText = Color(0xff8D8D8D);
   static const Color disableText = Color(0xff868D95);
   static const Color outLineBorder = Color(0xffE9F1FF);
-
+  static const Color hintText = Color(0xff848A94);
+  static const Color outLineBorderFocus = Color(0xff756EF3);
 
   static const Color black = Color(0xff000000);
   static const Color white = Color(0xffffffff);
