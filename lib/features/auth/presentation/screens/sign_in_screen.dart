@@ -69,6 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+
                         ///Beautiful Circles
                         Transform.translate(
                           offset: Offset(constraints.maxWidth / 1.4, 10), // Moves right by 30 and down by 50
