@@ -5,11 +5,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomEmailField extends StatelessWidget {
   final TextEditingController email;
-  final FocusNode emailFocusNode;
+  final FocusNode focusNode;
   const CustomEmailField({
     super.key,
     required this.email,
-    required this.emailFocusNode
+    required this.focusNode
   });
 
   @override
@@ -27,7 +27,7 @@ class CustomEmailField extends StatelessWidget {
         }
         return null;
       },
-      focusNode: emailFocusNode,
+      focusNode: focusNode,
       onSubmit: (value) {},
     );
   }

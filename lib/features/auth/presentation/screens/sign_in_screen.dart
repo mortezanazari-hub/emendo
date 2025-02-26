@@ -75,10 +75,10 @@ class _SignInScreenState extends State<SignInScreen> {
                           child: SvgPicture.asset(Assets.authCirclesView),
                         ),
                         _signInTitle(localization,context),
-                        SizedBox(height: constraints.maxHeight / 40),
+                        SizedBox(height: constraints.maxHeight / 70),
                         _signInSubTitle(localization,context),
                         SizedBox(height: constraints.maxHeight / 25),
-                        CustomEmailField(email: email,emailFocusNode: emailFocusNode),
+                        CustomEmailField(email: email,focusNode: emailFocusNode),
                         SizedBox(height: constraints.maxHeight / 25),
                         CustomPasswordField(
                           password: password,

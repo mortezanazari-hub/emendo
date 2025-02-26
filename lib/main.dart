@@ -1,4 +1,5 @@
 import 'package:emendo/core/configs/app_theme.dart';
+import 'package:emendo/features/auth/presentation/screens/edit_password_Screen.dart';
 import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: AppTheme.lightTheme(),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: EditPasswordScreen(),
     );
   }
 }

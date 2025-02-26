@@ -35,7 +35,7 @@
 
   "editPass" : "Edit Password",
   "editPassTitle" : "Edit Your Password",
-  "editPassSubTitle" : "To edit your password, please fill in the following",
+  "editPassSubTitle" : "To edit your password, please fill in\nthe following",
   "confirm" : "Confirm",
 
   "textFields" : "All Of TextField HintText",
