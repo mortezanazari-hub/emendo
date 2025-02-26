@@ -1,41 +1,34 @@
 import 'package:emendo/common/helper/is_dark_mode.dart';
-import 'package:emendo/common/widgets/custom_app_bar.dart';
-import 'package:emendo/common/widgets/custom_button.dart';
-import 'package:emendo/common/widgets/custom_form_field.dart';
-import 'package:emendo/core/configs/Assets.dart';
-import 'package:emendo/core/configs/app_colors.dart';
-import 'package:emendo/core/configs/app_text_styles.dart';
-import 'package:emendo/features/auth/presentation/screens/sign_in_screen.dart';
-import 'package:emendo/features/auth/presentation/widgets/custom_email_field.dart';
+import 'package:emendo/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../../common/widgets/custom_app_bar.dart';
+import '../../../../common/widgets/custom_button.dart';
+import '../../../../core/configs/Assets.dart';
+import '../../../../core/configs/app_colors.dart';
+import '../../../../core/configs/app_text_styles.dart';
+import '../widgets/custom_email_field.dart';
 import '../widgets/custom_password_field.dart';
 
-
-
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  late final TextEditingController name;
+class _SignInScreenState extends State<SignInScreen> {
   late final TextEditingController email;
   late final TextEditingController password;
   final emailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
-  final nameFocusNode = FocusNode();
 
 
   @override
   void initState() {
     super.initState();
-    name = TextEditingController();
     email = TextEditingController();
     password = TextEditingController();
   }
@@ -43,7 +36,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void dispose() {
     super.dispose();
-    name.dispose();
     email.dispose();
     password.dispose();
   }
@@ -55,13 +47,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       appBar: CustomAppBar(
         title: Text(
-            localization!.signIn,
-            style: AppTextStyles.base(
-                context: context,
-                color: LightColors.mainText,
-                fontSize: 18,
-                fontWeight: FontWeight.bold
-            )),
+          localization!.signIn,
+          style: AppTextStyles.base(
+            context: context,
+            color: LightColors.mainText,
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+          )),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -82,11 +74,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           offset: Offset(constraints.maxWidth / 1.4, 10), // Moves right by 30 and down by 50
                           child: SvgPicture.asset(Assets.authCirclesView),
                         ),
-                        _signUpTitle(localization,context),
+                        _signInTitle(localization,context),
                         SizedBox(height: constraints.maxHeight / 40),
-                        _signUpSubTitle(localization,context),
-                        SizedBox(height: constraints.maxHeight / 20),
-                        _nameField(localization,name,nameFocusNode),
+                        _signInSubTitle(localization,context),
                         SizedBox(height: constraints.maxHeight / 25),
                         CustomEmailField(email: email,emailFocusNode: emailFocusNode),
                         SizedBox(height: constraints.maxHeight / 25),
@@ -95,23 +85,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           passwordFocusNode: passwordFocusNode,
                           hintText: localization.passwordHintForTextField,
                         ),
-                        SizedBox(height: constraints.maxHeight / 25),
+                        SizedBox(height: constraints.maxHeight / 50),
+                        _forgetPass(localization,context),
+                        SizedBox(height: constraints.maxHeight / 35),
                         CustomButtons.primary(
                           text: localization.signUp,
                           context: context,
                           onPressed: () {},
                         ),
                         SizedBox(height: constraints.maxHeight / 25),
-                        _signUpWithText(localization,context),
+                        _signInWithText(localization,context),
                         SizedBox(height: constraints.maxHeight / 25),
                         _googleLogo(localization,context),
                         SizedBox(height: constraints.maxHeight / 25),
-                        ///Have An Account? SignIN Widget
+                        ///NotRegisterYet? SIGN UP
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              localization.haveAnAccount,
+                              localization.noRegisterYet,
                               style: AppTextStyles.base(
                                   color: context.isDarkMode ? DarkColors.disableText : LightColors.disableText,
                                   fontWeight: FontWeight.w500,
@@ -121,12 +113,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             GestureDetector(
                               onTap: () {
                                 Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => SignInScreen(),)
+                                    context,
+                                    MaterialPageRoute(builder: (context) => SignUpScreen(),)
                                 );
                               },
                               child: Text(
-                                " ${localization.signIn}",
+                                " ${localization.signUp}",
                                 style: AppTextStyles.base(
                                     color: context.isDarkMode ? DarkColors.primeColor : LightColors.primeColor,
                                     fontWeight: FontWeight.bold,
@@ -147,21 +139,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 }
-Widget _signUpTitle(AppLocalizations localization,context){
+Widget _signInTitle(AppLocalizations localization,context){
   return Text(
-    localization.signUpTitle,
+    localization.signInTitle,
     style: AppTextStyles.base(
-      context: context,
-      fontSize: 25,
-      color: LightColors.mainText,
-      fontWeight: FontWeight.w900
-      ),
-    );
+        context: context,
+        fontSize: 25,
+        color: LightColors.mainText,
+        fontWeight: FontWeight.w900
+    ),
+  );
 }
 
-Widget _signUpSubTitle(AppLocalizations localization,BuildContext context){
+Widget _signInSubTitle(AppLocalizations localization,BuildContext context){
   return Text(
-    localization.signUpSubTitle,
+    localization.signInSubTitle,
     style: AppTextStyles.base(
         context: context,
         fontSize: 14,
@@ -172,28 +164,27 @@ Widget _signUpSubTitle(AppLocalizations localization,BuildContext context){
   );
 }
 
-Widget _nameField (AppLocalizations localization,email,nameFocusNode){
-  return CustomFormField(
-    textEditingController: email,
-    hintText: localization.userNameHintForTextField,
-    validator: (value) {
-      if (value == null) return "cant be empty";
-      if (value.isEmpty) return "cant be empty";
-
-      if (value.length > 40) {
-        return "Name is too long";
-      }
-      return null;
-    },
-    focusNode: nameFocusNode,
-    onSubmit: (value) {},
+Widget _forgetPass(AppLocalizations localization,context){
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: [
+      Text(
+        localization.signInForgetPass,
+        style: AppTextStyles.base(
+            context: context,
+            fontSize: 14,
+            color: LightColors.mainText,
+            fontWeight: FontWeight.bold
+        ),
+      ),
+    ],
   );
 }
 
-Widget _signUpWithText(AppLocalizations localization,BuildContext context){
+Widget _signInWithText(AppLocalizations localization,BuildContext context){
   return Center(
     child: Text(
-      localization.signUpWith,
+      localization.signInWith,
       style: AppTextStyles.base(
           context: context,
           fontSize: 15,

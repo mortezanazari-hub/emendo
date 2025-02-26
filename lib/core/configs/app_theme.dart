@@ -8,7 +8,6 @@ class AppTheme {
     return ThemeData(
       primaryColor: LightColors.primeColor,
       brightness: Brightness.light,
-
       fontFamily: 'OpenSans',
       focusColor: Colors.transparent,
       highlightColor: Colors.transparent,
@@ -17,7 +16,7 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: LightColors.outLineBorderFocus,width: 1.5)
+            borderSide: const BorderSide(color: LightColors.primeColor,width: 1.5)
         ),
         contentPadding: const EdgeInsets.all(30),
         enabledBorder: OutlineInputBorder(
@@ -26,17 +25,17 @@ class AppTheme {
         ),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: LightColors.outLineBorderFocus)
+            borderSide: const BorderSide(color: LightColors.primeColor)
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
+          borderSide: BorderSide(color: LightColors.primeColor, width: 1.5),
         ),
-        errorStyle: const TextStyle(color: LightColors.outLineBorderFocus),
+        errorStyle: const TextStyle(color: LightColors.primeColor),
         suffixIconColor: Colors.grey.shade800,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
+          borderSide: const BorderSide(color: LightColors.primeColor, width: 1.5),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -62,26 +61,26 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: LightColors.outLineBorderFocus,width: 1.5)
+            borderSide: const BorderSide(color: DarkColors.primeColor,width: 1.5)
         ),
         contentPadding: const EdgeInsets.all(30),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: LightColors.outLineBorder, width: 1.5),
+          borderSide: BorderSide(color: DarkColors.outLineBorder, width: 1.5),
         ),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
-            borderSide: const BorderSide(color: LightColors.outLineBorderFocus)
+            borderSide: const BorderSide(color: DarkColors.primeColor)
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
+          borderSide: BorderSide(color: DarkColors.primeColor, width: 1.5),
         ),
-        errorStyle: const TextStyle(color: LightColors.outLineBorderFocus),
+        errorStyle: const TextStyle(color: DarkColors.primeColor),
         suffixIconColor: Colors.grey.shade800,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: LightColors.outLineBorderFocus, width: 1.5),
+          borderSide: const BorderSide(color: DarkColors.primeColor, width: 1.5),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

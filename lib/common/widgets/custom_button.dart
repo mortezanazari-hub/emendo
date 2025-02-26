@@ -177,7 +177,7 @@ class CustomButtons {
       height: 48,
       text: text,
       onPressed: onPressed,
-      foregroundColor: isDark ? DarkColors.outLineBorderFocus : LightColors.white,
+      foregroundColor: isDark ? DarkColors.primeColor : LightColors.white,
       backgroundColor: isDark ? DarkColors.primeColor : LightColors.primeColor,
       textStyle:
           const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

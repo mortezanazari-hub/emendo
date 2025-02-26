@@ -18,11 +18,12 @@
   "signUpTitle" : "Create Account",
   "signUpSubTitle" : "Please enter your Information and\ncreate your account",
   "signUpWith" : "Signup With",
+  "signInForgetPass" : "Forgot Password?",
   "haveAnAccount" : "Have an Account?",
 
   "signIn" : "Sign In",
   "signInTitle" : "Welcome Back",
-  "signInSubTitle" : "Please enter your email address and password for Login",
+  "signInSubTitle" : "Please enter your email address\nand password for Login",
   "forgetPassword" : "Forgot Password?",
   "signInWith" : "Signin with",
   "noRegisterYet" : "Not Registrar Yet?",
