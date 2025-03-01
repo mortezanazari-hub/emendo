@@ -3,7 +3,7 @@ import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../core/configs/Assets.dart';
+import '../../core/configs/assets.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Widget? title;

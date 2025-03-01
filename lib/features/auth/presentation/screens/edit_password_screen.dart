@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../common/widgets/custom_app_bar.dart';
-import '../../../../common/widgets/custom_button.dart';
-import '../../../../core/configs/Assets.dart';
-import '../../../../core/configs/app_colors.dart';
-import '../../../../core/configs/app_text_styles.dart';
-import '../widgets/custom_password_field.dart';
+import 'package:emendo/common/widgets/custom_app_bar.dart';
+import 'package:emendo/common/widgets/custom_button.dart';
+import 'package:emendo/core/configs/assets.dart';
+import 'package:emendo/core/configs/app_colors.dart';
+import 'package:emendo/core/configs/app_text_styles.dart';
+import 'package:emendo/features/auth/presentation/widgets/custom_password_field.dart';
 
 class EditPasswordScreen extends StatefulWidget {
   const EditPasswordScreen({super.key});

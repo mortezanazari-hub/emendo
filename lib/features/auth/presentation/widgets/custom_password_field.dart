@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../common/widgets/custom_form_field.dart';
+import 'package:emendo/common/widgets/custom_form_field.dart';
 
 class CustomPasswordField extends StatelessWidget {
   final TextEditingController password;

@@ -1,7 +1,5 @@
 import 'package:emendo/core/configs/app_theme.dart';
-import 'package:emendo/features/auth/presentation/screens/edit_password_Screen.dart';
 import 'package:emendo/features/intro/presentations/screens/intro_screen.dart';
-import 'package:emendo/features/splash/presentation/screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
