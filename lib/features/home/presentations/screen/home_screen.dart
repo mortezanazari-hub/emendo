@@ -1,4 +1,5 @@
 import 'package:emendo/common/widgets/custom_app_bar.dart';
+import 'package:emendo/features/home/presentations/widgets/workflow_title_show.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {},
           icon: Icon(Icons.search),
         ),
-        title: Text("Workflow"),
+        title: WorkflowTitleShow(),
         actionButton: IconButton(
           onPressed: () {},
           icon: Icon(Icons.crop_landscape),
