@@ -3,7 +3,7 @@ import 'package:emendo/common/helper/is_rtl_mode.dart';
 import 'package:emendo/core/configs/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../core/configs/assets.dart';
+import 'package:emendo/core/configs/assets.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Widget? title;
@@ -20,8 +20,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 13.0),
+      padding: const EdgeInsets.only(left: 13.0, right: 13),
       child: AppBar(
+        actions: [actionButton ?? SizedBox.shrink()],
         centerTitle: true,
         title: title ?? const Text(''),
         backgroundColor: backGroundColor ?? Colors.transparent,
