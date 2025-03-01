@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
 class WorkflowTitleShow extends StatelessWidget {
-  const WorkflowTitleShow({super.key});
+  final String workflowName;
+
+  const WorkflowTitleShow({required this.workflowName, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [Icon(Icons.arrow_drop_down), Text("data")],
+    return Ink(
+      child: InkWell(
+        onTap: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Icon(Icons.arrow_drop_down), Text(workflowName)],
+        ),
+      ),
     );
   }
 }

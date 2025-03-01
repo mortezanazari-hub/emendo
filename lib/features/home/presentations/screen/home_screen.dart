@@ -1,5 +1,6 @@
 import 'package:emendo/common/widgets/custom_app_bar.dart';
 import 'package:emendo/features/home/presentations/widgets/workflow_title_show.dart';
+import 'package:emendo/features/tasks/data/local/fake_workflow_db.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,10 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {},
           icon: Icon(Icons.search),
         ),
-        title: WorkflowTitleShow(),
+        title: WorkflowTitleShow(
+          workflowName: FakeWorkflowDb.getWorkflows[0].name,
+        ),
         actionButton: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.crop_landscape),
+          icon: Icon(Icons.calendar_month),
         ),
       ),
     );
