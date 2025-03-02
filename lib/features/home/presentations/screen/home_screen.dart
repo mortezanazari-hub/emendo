@@ -1,9 +1,12 @@
+import 'package:emendo/common/helper/app_values.dart';
 import 'package:emendo/common/widgets/custom_app_bar.dart';
 import 'package:emendo/features/home/presentations/widgets/workflow_title_show.dart';
 import 'package:emendo/features/tasks/data/local/fake_workflow_db.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:ui';
+
+import '../widgets/selector_modal.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,9 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _showCalenderModal = false;
   bool _showWorkflowSelectorModal = false;
 
-  // برای دسترسی به مختصات آیکون
+  /// key to find calender icon and workflow selector
   final GlobalKey _calenderIconKey = GlobalKey();
   final GlobalKey _workflowSelectorKey = GlobalKey();
+
+  /// area of calender icon and workflow selector
   Rect? _calenderIconRect;
   Rect? _workflowSelectorRect;
 
@@ -31,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  ///calculate calender icon position
   void _calculateCalenderIconPosition() {
     final renderBox =
         _calenderIconKey.currentContext?.findRenderObject() as RenderBox?;
@@ -42,10 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _openCalenderModal() => setState(() => _showCalenderModal = true);
+  ///show or hide calender list modal
+  void _calenderModal() =>
+      setState(() => _showCalenderModal = !_showCalenderModal);
 
-  void _closeCalenderModal() => setState(() => _showCalenderModal = false);
-
+  ///calculate workflow selector position
   void _calculateWorkflowSelectorPosition() {
     final renderBox =
         _workflowSelectorKey.currentContext?.findRenderObject() as RenderBox?;
@@ -57,11 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _openWorkflowSelectorModal() =>
-      setState(() => _showWorkflowSelectorModal = true);
-
-  void _closeWorkflowSelectorModal() =>
-      setState(() => _showWorkflowSelectorModal = false);
+  void _workflowModal() =>
+      setState(() => _showWorkflowSelectorModal = !_showWorkflowSelectorModal);
 
   @override
   Widget build(BuildContext context) {
@@ -77,19 +81,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 title: WorkflowTitleShow(
                   key: _workflowSelectorKey,
-                  workflowName: FakeWorkflowDb.getWorkflows[0].name,
+                  workflowName: AppValues.currentWorkflow.name,
                   onTap: () {
-                    setState(() {
-                      _openWorkflowSelectorModal();
-                    });
+                    _workflowModal();
                   },
                 ),
                 actionButton: IconButton(
                   key: _calenderIconKey,
                   onPressed: () {
-                    setState(() {
-                      _openCalenderModal();
-                    });
+                    _calenderModal();
                   },
                   icon: Icon(Icons.calendar_month),
                 ),
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
                   child: Container(
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -135,10 +135,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         const Text('تقویم یا محتوای دیگر...'),
                         const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: _closeCalenderModal,
-                          child: const Text('بستن'),
-                        ),
                       ],
                     ),
                   ),
@@ -146,43 +142,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ],
-          if (_showWorkflowSelectorModal && _workflowSelectorRect != null) ...[
-            Positioned.fill(
-              child: ClipPath(
-                clipper: IconHoleClipper(_workflowSelectorRect!),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                  child: Container(
-                    color: Colors.black.withOpacity(0.3),
-                  ),
-                ),
-              ),
+          if (_workflowSelectorRect != null)
+            SelectorModal(
+              onClose: _workflowModal,
+              workflows: FakeWorkflowDb.getWorkflows
+                  .map((workflow) => workflow.name)
+                  .toList(),
+              showModal: _showWorkflowSelectorModal,
+              workflowSelectorRect: _workflowSelectorRect!,
             ),
-            // خودِ مودال یا کارت وسط صفحه
-            Positioned.fill(
-              child: Center(
-                child: Material(
-                  elevation: 4,
-                  borderRadius: BorderRadius.circular(12),
-                  child: SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('انتخاب گر ورکفلو یا محتوای دیگر...'),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: _closeWorkflowSelectorModal,
-                          child: const Text('بستن'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
         ],
       ),
     );
