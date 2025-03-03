@@ -53,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       appBar: CustomAppBar(
         title: Text(
-            localization!.signIn,
+            localization!.signUp,
             style: AppTextStyles.base(
                 context: context,
                 color: LightColors.mainText,

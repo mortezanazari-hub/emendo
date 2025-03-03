@@ -1,5 +1,4 @@
 import 'package:emendo/core/configs/app_theme.dart';
-import 'package:emendo/features/home/presentations/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
