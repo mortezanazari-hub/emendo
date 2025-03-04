@@ -1,8 +1,8 @@
 class SignUpParam {
-  String? fullName;
+  String? name;
   String email;
   String password;
 
 
-  SignUpParam({this.fullName,required this.email,required this.password});
+  SignUpParam({this.name,required this.email,required this.password});
 }
