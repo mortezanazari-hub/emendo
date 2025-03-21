@@ -9,8 +9,8 @@ import 'package:emendo/features/home/presentations/screen/home_screen.dart';
 class SelectorModal extends StatefulWidget {
   final Rect workflowSelectorRect;
   final bool showModal;
-  final List<String> workflows; // List of items
-  final VoidCallback? onClose; // Add callback for closing the modal
+  final List<String> workflows;
+  final VoidCallback? onClose;
 
   const SelectorModal({
     super.key,
@@ -29,6 +29,7 @@ class _SelectorModalState extends State<SelectorModal>
   late AnimationController _animationController;
   late Animation<double> _slideAnimation;
   late Animation<double> _opacityAnimation;
+  bool _shouldShow = false;
 
   @override
   void initState() {
@@ -38,7 +39,6 @@ class _SelectorModalState extends State<SelectorModal>
       duration: const Duration(milliseconds: 300),
     );
 
-    // Start animation from the bottom of workflowSelectorRect
     _slideAnimation = Tween<double>(
       begin: widget.workflowSelectorRect.bottom,
       end: widget.workflowSelectorRect.bottom + 10,
@@ -47,7 +47,6 @@ class _SelectorModalState extends State<SelectorModal>
       curve: Curves.easeOut,
     ));
 
-    // Add opacity animation
     _opacityAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -56,47 +55,45 @@ class _SelectorModalState extends State<SelectorModal>
       curve: Curves.easeOut,
     ));
 
-    // Start animation when modal is shown
     if (widget.showModal) {
+      _shouldShow = true;
       _animationController.forward();
     }
+
+    _animationController.addStatusListener((status) {
+      if (status == AnimationStatus.dismissed) {
+        setState(() {
+          _shouldShow = false;
+        });
+      }
+    });
   }
 
   @override
   void didUpdateWidget(SelectorModal oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    // Handle show/hide transitions
     if (widget.showModal != oldWidget.showModal) {
       if (widget.showModal) {
+        setState(() {
+          _shouldShow = true;
+        });
         _animationController.forward();
       } else {
         _animationController.reverse();
       }
-    }
-
-    // Update animation values if the rect changes
-    if (widget.workflowSelectorRect != oldWidget.workflowSelectorRect) {
-      _slideAnimation = Tween<double>(
-        begin: widget.workflowSelectorRect.bottom,
-        end: widget.workflowSelectorRect.bottom + 10,
-      ).animate(CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeOut,
-      ));
     }
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    widget.onClose?.call();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Return empty widget if modal is not showing and animation is complete
-    if (!widget.showModal && _animationController.isDismissed) {
+    if (!_shouldShow) {
       return const SizedBox.shrink();
     }
 
@@ -105,18 +102,15 @@ class _SelectorModalState extends State<SelectorModal>
       builder: (context, child) {
         return Stack(
           children: [
-            // Backdrop filter with hole - fade in/out with animation
             Positioned.fill(
               child: Opacity(
                 opacity: _opacityAnimation.value,
                 child: GestureDetector(
-                  // Close modal when tapping outside
                   onTap: () {
-                    if (widget.showModal) {
+                    if (widget.showModal && !_animationController.isAnimating) {
                       widget.onClose?.call();
                     }
                   },
-
                   child: ClipPath(
                     clipper: IconHoleClipper(widget.workflowSelectorRect),
                     child: BackdropFilter(
@@ -129,7 +123,6 @@ class _SelectorModalState extends State<SelectorModal>
                 ),
               ),
             ),
-            // Animated modal with fade effect
             Positioned(
               top: _slideAnimation.value,
               left: widget.workflowSelectorRect.left,
@@ -166,14 +159,13 @@ class _SelectorModalState extends State<SelectorModal>
 
 class ItemInModal extends StatefulWidget {
   final int index;
+  final SelectorModal widget;
 
   const ItemInModal({
     super.key,
     required this.widget,
     required this.index,
   });
-
-  final SelectorModal widget;
 
   @override
   State<ItemInModal> createState() => _ItemInModalState();
@@ -185,7 +177,6 @@ class _ItemInModalState extends State<ItemInModal> {
     return SizedBox(
       width: double.infinity,
       child: InkWell(
-        //highlightColor: Colors.red,
         onTap: () {
           setState(() {
             final currentWfName = AppValues.currentWorkflow.name;

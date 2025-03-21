@@ -64,8 +64,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _workflowModal() =>
-      setState(() => _showWorkflowSelectorModal = !_showWorkflowSelectorModal);
+  void _workflowModal() {
+    setState(() {
+      _showWorkflowSelectorModal = !_showWorkflowSelectorModal;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,15 +145,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ],
-          if (_workflowSelectorRect != null)
+          if (_workflowSelectorRect != null && !_showCalenderModal)
             SelectorModal(
-              onClose: _workflowModal,
+              onClose: () {
+                _workflowModal();
+                //  _workflowSelectorRect = null;
+              },
               workflows: FakeWorkflowDb.getWorkflows
                   .map((workflow) => workflow.name)
                   .toList(),
               showModal: _showWorkflowSelectorModal,
               workflowSelectorRect: _workflowSelectorRect!,
-            ),
+            )
         ],
       ),
     );
