@@ -112,50 +112,45 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          if (_showCalenderModal && _calenderIconRect != null) ...[
-            Positioned.fill(
-              child: ClipPath(
-                clipper: IconHoleClipper(_calenderIconRect!),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                  child: Container(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-            // خودِ مودال یا کارت وسط صفحه
-            Positioned.fill(
-              child: Center(
-                child: Material(
-                  elevation: 4,
-                  borderRadius: BorderRadius.circular(12),
-                  child: SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('تقویم یا محتوای دیگر...'),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-          if (_workflowSelectorRect != null && !_showCalenderModal)
+          if (_workflowSelectorRect != null &&
+              !_showCalenderModal &&
+              _showWorkflowSelectorModal)
             SelectorModal(
               onClose: () {
                 _workflowModal();
                 //  _workflowSelectorRect = null;
               },
-              workflows: FakeWorkflowDb.getWorkflows
+              itemList: FakeWorkflowDb.getWorkflows
                   .map((workflow) => workflow.name)
                   .toList(),
               showModal: _showWorkflowSelectorModal,
-              workflowSelectorRect: _workflowSelectorRect!,
+              modalRect: _workflowSelectorRect!,
+            ),
+          if (_calenderIconRect != null &&
+              !_showWorkflowSelectorModal &&
+              _showCalenderModal)
+            SelectorModal(
+              onClose: () {
+                _calenderModal();
+                //  _workflowSelectorRect = null;
+              },
+              itemList: [
+                "mah1",
+                "mah2",
+                "mah3",
+                "mah4",
+                "mah5",
+                "mah6",
+                "mah7",
+                "mah8",
+                "mah9",
+                "mah10",
+                "mah11",
+                "mah12",
+              ],
+              showModal: _showCalenderModal,
+              modalRect: _calenderIconRect!,
+              isRight: true,
             )
         ],
       ),

@@ -7,17 +7,19 @@ import 'package:flutter/material.dart';
 import 'package:emendo/features/home/presentations/screen/home_screen.dart';
 
 class SelectorModal extends StatefulWidget {
-  final Rect workflowSelectorRect;
+  final Rect modalRect;
   final bool showModal;
-  final List<String> workflows;
+  final List<String> itemList;
   final VoidCallback? onClose;
+  final bool? isRight;
 
   const SelectorModal({
     super.key,
-    required this.workflowSelectorRect,
+    required this.modalRect,
     required this.showModal,
-    required this.workflows,
+    required this.itemList,
     this.onClose,
+    this.isRight,
   });
 
   @override
@@ -31,6 +33,12 @@ class _SelectorModalState extends State<SelectorModal>
   late Animation<double> _opacityAnimation;
   bool _shouldShow = false;
 
+  void _safeClose() {
+    if (mounted) {
+      widget.onClose?.call();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -40,8 +48,8 @@ class _SelectorModalState extends State<SelectorModal>
     );
 
     _slideAnimation = Tween<double>(
-      begin: widget.workflowSelectorRect.bottom,
-      end: widget.workflowSelectorRect.bottom + 10,
+      begin: widget.modalRect.bottom,
+      end: widget.modalRect.bottom + 10,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeOut,
@@ -65,6 +73,7 @@ class _SelectorModalState extends State<SelectorModal>
         setState(() {
           _shouldShow = false;
         });
+        _safeClose();
       }
     });
   }
@@ -87,7 +96,6 @@ class _SelectorModalState extends State<SelectorModal>
   @override
   void dispose() {
     _animationController.dispose();
-    widget.onClose?.call();
     super.dispose();
   }
 
@@ -108,11 +116,11 @@ class _SelectorModalState extends State<SelectorModal>
                 child: GestureDetector(
                   onTap: () {
                     if (widget.showModal && !_animationController.isAnimating) {
-                      widget.onClose?.call();
+                      _safeClose();
                     }
                   },
                   child: ClipPath(
-                    clipper: IconHoleClipper(widget.workflowSelectorRect),
+                    clipper: IconHoleClipper(widget.modalRect),
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
                       child: Container(
@@ -125,7 +133,8 @@ class _SelectorModalState extends State<SelectorModal>
             ),
             Positioned(
               top: _slideAnimation.value,
-              left: widget.workflowSelectorRect.left,
+              left: (widget.isRight != true) ? widget.modalRect.left : null,
+              right: (widget.isRight == true) ? 15 : null,
               child: Opacity(
                 opacity: _opacityAnimation.value,
                 child: Material(
@@ -138,7 +147,7 @@ class _SelectorModalState extends State<SelectorModal>
                       minHeight: 100,
                     ),
                     child: ListView.builder(
-                      itemCount: widget.workflows.length,
+                      itemCount: widget.itemList.length,
                       itemBuilder: (context, index) {
                         return ItemInModal(
                           widget: widget,
@@ -180,7 +189,7 @@ class _ItemInModalState extends State<ItemInModal> {
         onTap: () {
           setState(() {
             final currentWfName = AppValues.currentWorkflow.name;
-            final currentSelect = widget.widget.workflows[widget.index];
+            final currentSelect = widget.widget.itemList[widget.index];
             if (currentWfName != currentSelect) {
               AppValues.currentWorkflow = FakeWorkflowDb.getWorkflows
                   .firstWhere((model) => model.name == currentSelect);
@@ -190,7 +199,7 @@ class _ItemInModalState extends State<ItemInModal> {
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Center(child: Text(widget.widget.workflows[widget.index])),
+          child: Center(child: Text(widget.widget.itemList[widget.index])),
         ),
       ),
     );
