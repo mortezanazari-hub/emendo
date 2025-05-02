@@ -2,6 +2,7 @@ import 'dart:ui';
 
 class LightColors {
   static const Color bgColor = Color(0xffffffff);
+  static const Color secondBgColor = Color(0xfff1f0fe);
 
   static const Color activeBorder = Color(0xff746DF1);
   static const Color disableBorder = Color(0xffE9F1FF);
@@ -24,6 +25,7 @@ class LightColors {
 
 class DarkColors {
   static const Color bgColor = Color(0xffffffff);
+  static const Color secondBgColor = Color(0xfff1f0fe);
 
   static const Color activeBorder = Color(0xff746DF1);
   static const Color disableBorder = Color(0xffE9F1FF);

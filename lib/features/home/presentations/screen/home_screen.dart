@@ -2,11 +2,11 @@ import 'package:emendo/common/helper/app_values.dart';
 import 'package:emendo/common/widgets/custom_app_bar.dart';
 import 'package:emendo/features/home/presentations/widgets/search_modal.dart';
 import 'package:emendo/features/home/presentations/widgets/workflow_title_show.dart';
+import 'package:emendo/features/tasks/data/local/fake_tasks_db.dart';
 import 'package:emendo/features/tasks/data/local/fake_workflow_db.dart';
+import 'package:emendo/features/tasks/presentations/widgets/task_widget.dart';
 import 'package:flutter/material.dart';
-
-
-import '../widgets/selector_modal.dart';
+import 'package:emendo/features/home/presentations/widgets/selector_modal.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -125,13 +125,13 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.all(16),
-                  children: const [
-                    ListTile(
-                      title: Text(
-                          'Edit my proposalEdit my proposalEdit my proposalEdit my proposal'),
+                  children: [
+                    const ListTile(
+                      title: Text('my proposalEdit '),
                       subtitle: Text('2025/03/02 - 12:00 PM'),
                       trailing: Text('10/18'),
                     ),
+                    TaskWidget(task: FakeTasksDb.getTasks[0])
                   ],
                 ),
               ),

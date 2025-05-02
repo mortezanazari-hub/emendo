@@ -5,6 +5,11 @@ class FakeTasksDb {
   static List<TaskModel> getTasks = [
     TaskModel(
       "task1",
+      hasDate: true,
+      dueDate: DateTime.now(),
+      hasTime: true,
+      hasNotification: true,
+      workflow: FakeWorkflowDb.getWorkflows[0],
     ),
     TaskModel(
       "task2 is a simple task with a long name",
@@ -27,7 +32,6 @@ class FakeTasksDb {
         DateTime.now().day,
       ),
       hasTime: true,
-      dueTime: DateTime.now(),
     ),
     TaskModel(
       "task5 has workflow",

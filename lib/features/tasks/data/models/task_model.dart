@@ -7,7 +7,6 @@ class TaskModel {
   final bool? hasDate;
   final DateTime? dueDate;
   final bool? hasTime;
-  final DateTime? dueTime;
   final bool? hasNotification;
 
   TaskModel(
@@ -17,7 +16,6 @@ class TaskModel {
     this.hasDate,
     this.dueDate,
     this.hasTime,
-    this.dueTime,
     this.hasNotification,
   });
 }
