@@ -4,7 +4,7 @@ import 'package:emendo/common/helper/app_values.dart';
 import 'package:emendo/features/tasks/data/local/fake_workflow_db.dart';
 import 'package:flutter/material.dart';
 
-import 'package:emendo/features/home/presentations/screen/home_screen.dart';
+import 'package:emendo/common/helper/icon_hole_clipper.dart';
 
 class SelectorModal extends StatefulWidget {
   final Rect modalRect;

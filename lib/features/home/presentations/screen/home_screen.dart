@@ -1,10 +1,10 @@
 import 'package:emendo/common/helper/app_values.dart';
 import 'package:emendo/common/widgets/custom_app_bar.dart';
+import 'package:emendo/features/home/presentations/widgets/search_modal.dart';
 import 'package:emendo/features/home/presentations/widgets/workflow_title_show.dart';
 import 'package:emendo/features/tasks/data/local/fake_workflow_db.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:ui';
 
 import '../widgets/selector_modal.dart';
 
@@ -17,14 +17,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _showCalenderModal = false;
+  bool _showSearchModal = false;
   bool _showWorkflowSelectorModal = false;
 
   /// key to find calender icon and workflow selector
   final GlobalKey _calenderIconKey = GlobalKey();
+  final GlobalKey _searchIconKey = GlobalKey();
   final GlobalKey _workflowSelectorKey = GlobalKey();
 
   /// area of calender icon and workflow selector
   Rect? _calenderIconRect;
+  Rect? _searchIconRect;
   Rect? _workflowSelectorRect;
 
   @override
@@ -33,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _calculateCalenderIconPosition();
       _calculateWorkflowSelectorPosition();
+      _calculateSearchIconPosition();
     });
   }
 
@@ -52,6 +56,21 @@ class _HomeScreenState extends State<HomeScreen> {
   void _calenderModal() =>
       setState(() => _showCalenderModal = !_showCalenderModal);
 
+  ///calculate search icon position
+  void _calculateSearchIconPosition() {
+    final renderBox =
+        _searchIconKey.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      final offset = renderBox.localToGlobal(Offset.zero);
+      setState(() {
+        _searchIconRect = offset & renderBox.size;
+      });
+    }
+  }
+
+  ///show or hide search modal
+  void _searchModal() => setState(() => _showSearchModal = !_showSearchModal);
+
   ///calculate workflow selector position
   void _calculateWorkflowSelectorPosition() {
     final renderBox =
@@ -64,6 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  ///show or hide workflow selector modal
   void _workflowModal() {
     setState(() {
       _showWorkflowSelectorModal = !_showWorkflowSelectorModal;
@@ -78,10 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             children: [
               CustomAppBar(
-                leadingWidget: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.search),
-                ),
+                leadingWidget: !_showSearchModal
+                    ? IconButton(
+                        key: _searchIconKey,
+                        onPressed: () {
+                          _searchModal();
+                        },
+                        icon: Icon(Icons.search),
+                      )
+                    : SizedBox.shrink(),
                 title: WorkflowTitleShow(
                   key: _workflowSelectorKey,
                   workflowName: AppValues.currentWorkflow.name,
@@ -112,8 +137,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+
+          ///workflow selector modal
           if (_workflowSelectorRect != null &&
               !_showCalenderModal &&
+              !_showSearchModal &&
               _showWorkflowSelectorModal)
             SelectorModal(
               onClose: () {
@@ -126,8 +154,11 @@ class _HomeScreenState extends State<HomeScreen> {
               showModal: _showWorkflowSelectorModal,
               modalRect: _workflowSelectorRect!,
             ),
+
+          ///calender modal
           if (_calenderIconRect != null &&
               !_showWorkflowSelectorModal &&
+              !_showSearchModal &&
               _showCalenderModal)
             SelectorModal(
               onClose: () {
@@ -151,6 +182,19 @@ class _HomeScreenState extends State<HomeScreen> {
               showModal: _showCalenderModal,
               modalRect: _calenderIconRect!,
               isRight: true,
+            ),
+
+          ///search modal
+          if (_searchIconRect != null &&
+              !_showCalenderModal &&
+              !_showWorkflowSelectorModal &&
+              _showSearchModal)
+            SearchModal(
+              onClose: () {
+                _searchModal();
+              },
+              showModal: _showSearchModal,
+              modalRect: _searchIconRect!,
             )
         ],
       ),
@@ -158,31 +202,3 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class IconHoleClipper extends CustomClipper<Path> {
-  final Rect iconRect;
-
-  IconHoleClipper(this.iconRect);
-
-  @override
-  Path getClip(Size size) {
-    // مسیر اصلی کل صفحه
-    final path = Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
-
-    // یک RRect (مستطیل با گوشه‌های گرد) دور آیکون
-    final RRect iconHole = RRect.fromRectAndRadius(
-      iconRect.inflate(0), // کمی فاصله از لبه‌های آیکون
-      const Radius.circular(50),
-    );
-
-    // اضافه کردن مسیر آیکون به عنوان سوراخ
-    path.addRRect(iconHole);
-    path.fillType = PathFillType.evenOdd; // ناحیه دوم را از اول کم می‌کند
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(IconHoleClipper oldClipper) {
-    return oldClipper.iconRect != iconRect;
-  }
-}

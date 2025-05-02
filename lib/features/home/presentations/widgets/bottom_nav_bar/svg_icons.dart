@@ -16,6 +16,7 @@ class SvgIcons extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       asset,
+      // ignore: deprecated_member_use
       color: isActive ? context.isDarkMode ? DarkColors.primeColor : LightColors.primeColor : null,
     );
   }
