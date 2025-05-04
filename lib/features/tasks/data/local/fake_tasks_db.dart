@@ -68,7 +68,13 @@ class FakeTasksDb {
       ),
       subTasks: [
         TaskModel("subTask1", subTasks: [
-          TaskModel("sub subtask1"),
+          TaskModel("sub subtask1", isDone: true, subTasks: [
+            TaskModel("task1"),
+            TaskModel("task1"),
+            TaskModel("task1"),
+            TaskModel("task1"),
+            TaskModel("task1"),
+          ]),
           TaskModel("sub subtask2"),
           TaskModel("sub subtask3"),
         ]),
@@ -86,8 +92,8 @@ class FakeTasksDb {
       ),
       subTasks: [
         TaskModel("subTask1", subTasks: [
-          TaskModel("sub subtask1"),
-          TaskModel("sub subtask2"),
+          TaskModel("sub subtask1", isDone: true),
+          TaskModel("sub subtask2", isDone: true),
           TaskModel("sub subtask3"),
         ]),
         TaskModel("sub Task2")

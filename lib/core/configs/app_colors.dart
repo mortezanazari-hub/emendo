@@ -3,16 +3,21 @@ import 'dart:ui';
 class LightColors {
   static const Color bgColor = Color(0xffffffff);
   static const Color secondBgColor = Color(0xfff1f0fe);
+  static const Color secondBgDisableColor = Color(0xfff8f7ff);
 
   static const Color activeBorder = Color(0xff746DF1);
   static const Color disableBorder = Color(0xffE9F1FF);
 
   static const Color primeColor = Color(0xff756EF3);
+  static const Color primeDisableColor = Color(0xffbab7fa);
+
   static const Color disableSliderColor = Color(0x363580FF);
 
   static const Color mainText = Color(0xff002055);
   static const Color secondText = Color(0xff2F394B);
   static const Color thirdText = Color(0xff8D8D8D);
+  static const Color fourText = Color(0xffd0d4d7);
+
   static const Color disableText = Color(0xff868D95);
   static const Color outLineBorder = Color(0xffE9F1FF);
   static const Color hintText = Color(0xff848A94);
@@ -26,16 +31,20 @@ class LightColors {
 class DarkColors {
   static const Color bgColor = Color(0xffffffff);
   static const Color secondBgColor = Color(0xfff1f0fe);
+  static const Color secondBgDisableColor = Color(0xfff8f7ff);
 
   static const Color activeBorder = Color(0xff746DF1);
   static const Color disableBorder = Color(0xffE9F1FF);
 
   static const Color primeColor = Color(0xff746DF1);
+  static const Color primeDisableColor = Color(0xffbab7fa);
   static const Color disableSliderColor = Color(0x363580FF);
 
   static const Color mainText = Color(0xff002055);
   static const Color secondText = Color(0xff2F394B);
   static const Color thirdText = Color(0xff8D8D8D);
+  static const Color fourText = Color(0xffd0d4d7);
+
   static const Color disableText = Color(0xff868D95);
   static const Color outLineBorder = Color(0xffE9F1FF);
   static const Color hintText = Color(0xff848A94);

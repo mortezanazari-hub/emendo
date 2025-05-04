@@ -123,16 +123,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.all(16),
-                  children: [
-                    const ListTile(
-                      title: Text('my proposalEdit '),
-                      subtitle: Text('2025/03/02 - 12:00 PM'),
-                      trailing: Text('10/18'),
-                    ),
-                    TaskWidget(task: FakeTasksDb.getTasks[0])
-                  ],
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(30),
+                  itemCount: FakeTasksDb.getTasks.length,
+                  itemBuilder: (context, index) {
+                    return TaskWidget(task: FakeTasksDb.getTasks[index]);
+                  },
                 ),
               ),
             ],
