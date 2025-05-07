@@ -38,18 +38,18 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _controller.forward();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _calculateCalenderIconPosition();
       _calculateWorkflowSelectorPosition();
       _calculateSearchIconPosition();
     });
-    _controller.forward();
   }
 
   @override
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _calculateCalenderIconPosition() {
     final renderBox =
-        _calenderIconKey.currentContext?.findRenderObject() as RenderBox?;
+    _calenderIconKey.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox != null) {
       final offset = renderBox.localToGlobal(Offset.zero);
       setState(() {
@@ -107,7 +107,10 @@ class _HomeScreenState extends State<HomeScreen>
       if (newIndex > oldIndex) newIndex--;
       final task = _tasks.removeAt(oldIndex);
       _tasks.insert(newIndex, task);
-      _controller.forward(from: 0); // trigger animation
+
+      // فقط آیتم جابجا شده رو انیمیت کن
+      _controller.reset();
+      _controller.forward();
     });
   }
 
@@ -146,19 +149,57 @@ class _HomeScreenState extends State<HomeScreen>
               Expanded(
                 child: _tasks.isEmpty
                     ? Center(child: Text("No tasks available"))
-                    : ReorderableListView.builder(
+                    : ListView.separated(
                         padding: const EdgeInsets.all(30),
                         itemCount: _tasks.length,
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 8),
                         itemBuilder: (context, index) {
-                          return ScaleTransition(
-                            key: ValueKey(_tasks[index].taskName),
-                            scale: _animation,
-                            child: TaskWidget(
+                          return Draggable<int>(
+                            data: index,
+                            feedback: Material(
+                              elevation: 4.0,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width -
+                                    60, // 30 padding on each side
+                                child: TaskWidget(
+                                  task: _tasks[index],
+                                ),
+                              ),
+                            ),
+                            childWhenDragging: Opacity(
+                              opacity: 0.5,
+                              child: TaskWidget(
+                                task: _tasks[index],
+                              ),
+                            ),
+                            child: DragTarget<int>(
+                              onAccept: (draggedIndex) {
+                                if (draggedIndex != index) {
+                                  setState(() {
+                                    final item = _tasks.removeAt(draggedIndex);
+                                    _tasks.insert(index, item);
+                                  });
+                                }
+                              },
+                              builder: (context, candidateData, rejectedData) {
+                                return AnimatedContainer(
+                                  duration: Duration(milliseconds: 200),
+                                  decoration: BoxDecoration(
+                                    border: candidateData.isNotEmpty
+                                        ? Border.all(
+                                            color: Colors.blue, width: 2)
+                                        : null,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TaskWidget(
                               task: _tasks[index],
                             ),
                           );
                         },
-                        onReorder: _onReorder,
+                            ),
+                          );
+                        },
                       ),
               ),
             ],

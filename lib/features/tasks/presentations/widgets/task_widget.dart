@@ -67,130 +67,126 @@ class _TaskWidgetState extends State<TaskWidget> {
         : (widget.task.getDirectCompletedSubTaskCount() /
             widget.task.getDirectSubTaskCount());
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 1, color: borderColor),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (widget.task.workflow != null)
-                    Text(
-                      widget.task.workflow!.name,
-                      style: AppTextStyles.base(
-                        context: context,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 10,
-                        color: titleColor,
-                      ),
-                    ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(width: 1, color: borderColor),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (widget.task.workflow != null)
                   Text(
-                    widget.task.taskName,
+                    widget.task.workflow!.name,
                     style: AppTextStyles.base(
                       context: context,
-                      fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: primeColor,
+                      fontSize: 10,
+                      color: titleColor,
                     ),
-                    maxLines: null, // تعداد خطوط نامحدود
-                    overflow: TextOverflow.clip, // برای اینکه متن بریده نشود
                   ),
-                  Wrap(
-                    // استفاده از Wrap
-                    spacing: 3, // فاصله بین ویجت ها
-                    children: [
-                      if (widget.task.hasDate == true)
-                        Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: secondBgColor),
-                          child: Text(
-                            DateFormat('yyyy/MM/dd')
-                                .format(widget.task.dueDate!),
-                            style: AppTextStyles.base(
-                              context: context,
-                              fontSize: 8,
-                              color: primeColor,
-                            ),
-                          ),
-                        ),
-                      if (widget.task.hasTime == true)
-                        Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: secondBgColor),
-                          child: Text(
-                            DateFormat('HH:mm').format(widget.task.dueDate!),
-                            style: AppTextStyles.base(
-                              context: context,
-                              fontSize: 8,
-                              color: primeColor,
-                            ),
-                          ),
-                        ),
-                      if (widget.task.hasNotification == true &&
-                          widget.task.hasTime == true)
-                        Container(
-                          padding: const EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: secondBgColor),
-                          child: Icon(
-                            Icons.notifications,
-                            size: 12,
+                Text(
+                  widget.task.taskName,
+                  style: AppTextStyles.base(
+                    context: context,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: primeColor,
+                  ),
+                  maxLines: null, // تعداد خطوط نامحدود
+                  overflow: TextOverflow.clip, // برای اینکه متن بریده نشود
+                ),
+                Wrap(
+                  // استفاده از Wrap
+                  spacing: 3, // فاصله بین ویجت ها
+                  children: [
+                    if (widget.task.hasDate == true)
+                      Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: secondBgColor),
+                        child: Text(
+                          DateFormat('yyyy/MM/dd').format(widget.task.dueDate!),
+                          style: AppTextStyles.base(
+                            context: context,
+                            fontSize: 8,
                             color: primeColor,
                           ),
                         ),
-                    ],
+                      ),
+                    if (widget.task.hasTime == true)
+                      Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: secondBgColor),
+                        child: Text(
+                          DateFormat('HH:mm').format(widget.task.dueDate!),
+                          style: AppTextStyles.base(
+                            context: context,
+                            fontSize: 8,
+                            color: primeColor,
+                          ),
+                        ),
+                      ),
+                    if (widget.task.hasNotification == true &&
+                        widget.task.hasTime == true)
+                      Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: secondBgColor),
+                        child: Icon(
+                          Icons.notifications,
+                          size: 12,
+                          color: primeColor,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 15),
+          if (widget.task.subTasks.isEmpty)
+            CustomCheckBox(
+              widget.task.isDone,
+              onChanged: (value) {
+                setState(() {
+                  widget.task.toggleDone();
+                });
+              },
+            ),
+          if (widget.task.subTasks.isNotEmpty)
+            InkWell(
+              onTap: () {
+                setState(() {
+                  totalCounter = !totalCounter;
+                });
+              },
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 15,
+                    height: 15,
+                    child: CircularProgressIndicator(
+                      backgroundColor: secondBgColor,
+                      value: presentCompleted,
+                      strokeWidth: 1,
+                    ),
                   ),
+                  SizedBox(width: 10),
+                  Text(taskCounter),
                 ],
               ),
             ),
-            const SizedBox(width: 15),
-            if (widget.task.subTasks.isEmpty)
-              CustomCheckBox(
-                widget.task.isDone,
-                onChanged: (value) {
-                  setState(() {
-                    widget.task.toggleDone();
-                  });
-                },
-              ),
-            if (widget.task.subTasks.isNotEmpty)
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    totalCounter = !totalCounter;
-                  });
-                },
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: CircularProgressIndicator(
-                        backgroundColor: secondBgColor,
-                        value: presentCompleted,
-                        strokeWidth: 1,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text(taskCounter),
-                  ],
-                ),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }
