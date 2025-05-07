@@ -4,6 +4,7 @@ import 'package:emendo/features/home/presentations/widgets/search_modal.dart';
 import 'package:emendo/features/home/presentations/widgets/workflow_title_show.dart';
 import 'package:emendo/features/tasks/data/local/fake_tasks_db.dart';
 import 'package:emendo/features/tasks/data/local/fake_workflow_db.dart';
+import 'package:emendo/features/tasks/data/models/task_model.dart';
 import 'package:emendo/features/tasks/presentations/widgets/task_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:emendo/features/home/presentations/widgets/selector_modal.dart';
@@ -15,32 +16,48 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   bool _showCalenderModal = false;
   bool _showSearchModal = false;
   bool _showWorkflowSelectorModal = false;
 
-  /// key to find calender icon and workflow selector
   final GlobalKey _calenderIconKey = GlobalKey();
   final GlobalKey _searchIconKey = GlobalKey();
   final GlobalKey _workflowSelectorKey = GlobalKey();
 
-  /// area of calender icon and workflow selector
   Rect? _calenderIconRect;
   Rect? _searchIconRect;
   Rect? _workflowSelectorRect;
 
+  final List<TaskModel> _tasks = List.from(FakeTasksDb.getTasks);
+
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
+
   @override
   void initState() {
     super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _calculateCalenderIconPosition();
       _calculateWorkflowSelectorPosition();
       _calculateSearchIconPosition();
     });
+    _controller.forward();
   }
 
-  ///calculate calender icon position
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   void _calculateCalenderIconPosition() {
     final renderBox =
         _calenderIconKey.currentContext?.findRenderObject() as RenderBox?;
@@ -52,11 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  ///show or hide calender list modal
   void _calenderModal() =>
       setState(() => _showCalenderModal = !_showCalenderModal);
 
-  ///calculate search icon position
   void _calculateSearchIconPosition() {
     final renderBox =
         _searchIconKey.currentContext?.findRenderObject() as RenderBox?;
@@ -68,10 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  ///show or hide search modal
   void _searchModal() => setState(() => _showSearchModal = !_showSearchModal);
 
-  ///calculate workflow selector position
   void _calculateWorkflowSelectorPosition() {
     final renderBox =
         _workflowSelectorKey.currentContext?.findRenderObject() as RenderBox?;
@@ -83,10 +96,18 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  ///show or hide workflow selector modal
   void _workflowModal() {
     setState(() {
       _showWorkflowSelectorModal = !_showWorkflowSelectorModal;
+    });
+  }
+
+  void _onReorder(int oldIndex, int newIndex) {
+    setState(() {
+      if (newIndex > oldIndex) newIndex--;
+      final task = _tasks.removeAt(oldIndex);
+      _tasks.insert(newIndex, task);
+      _controller.forward(from: 0); // trigger animation
     });
   }
 
@@ -123,18 +144,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(30),
-                  itemCount: FakeTasksDb.getTasks.length,
-                  itemBuilder: (context, index) {
-                    return TaskWidget(task: FakeTasksDb.getTasks[index]);
-                  },
-                ),
+                child: _tasks.isEmpty
+                    ? Center(child: Text("No tasks available"))
+                    : ReorderableListView.builder(
+                        padding: const EdgeInsets.all(30),
+                        itemCount: _tasks.length,
+                        itemBuilder: (context, index) {
+                          return ScaleTransition(
+                            key: ValueKey(_tasks[index].taskName),
+                            scale: _animation,
+                            child: TaskWidget(
+                              task: _tasks[index],
+                            ),
+                          );
+                        },
+                        onReorder: _onReorder,
+                      ),
               ),
             ],
           ),
 
-          ///workflow selector modal
           if (_workflowSelectorRect != null &&
               !_showCalenderModal &&
               !_showSearchModal &&
@@ -142,7 +171,6 @@ class _HomeScreenState extends State<HomeScreen> {
             SelectorModal(
               onClose: () {
                 _workflowModal();
-                //  _workflowSelectorRect = null;
               },
               itemList: FakeWorkflowDb.getWorkflows
                   .map((workflow) => workflow.name)
@@ -151,7 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
               modalRect: _workflowSelectorRect!,
             ),
 
-          ///calender modal
           if (_calenderIconRect != null &&
               !_showWorkflowSelectorModal &&
               !_showSearchModal &&
@@ -159,7 +186,6 @@ class _HomeScreenState extends State<HomeScreen> {
             SelectorModal(
               onClose: () {
                 _calenderModal();
-                //  _workflowSelectorRect = null;
               },
               itemList: [
                 "mah1",
@@ -180,7 +206,6 @@ class _HomeScreenState extends State<HomeScreen> {
               isRight: true,
             ),
 
-          ///search modal
           if (_searchIconRect != null &&
               !_showCalenderModal &&
               !_showWorkflowSelectorModal &&
@@ -197,4 +222,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
