@@ -32,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen>
 
   final List<TaskModel> _tasks = List.from(FakeTasksDb.getTasks);
 
+  // کلید برای لیست انیمیشن
+  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
+  // دیوریشن انیمیشن‌ها
+  final Duration _animationDuration = const Duration(milliseconds: 300);
+
   late final AnimationController _controller;
   late final Animation<double> _animation;
 
@@ -40,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 500),
     );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _controller.forward();
@@ -114,6 +120,115 @@ class _HomeScreenState extends State<HomeScreen>
     });
   }
 
+  // متد بهبود یافته با انیمیشن برای مدیریت تغییر وضعیت تسک‌ها
+  void _onTaskStatusChanged(int index, bool isDone) {
+    final task = _tasks[index];
+
+    // ابتدا تسک را با انیمیشن حذف می‌کنیم
+    _listKey.currentState?.removeItem(
+      index,
+      (context, animation) => _buildTaskItem(context, task, index, animation),
+      duration: _animationDuration,
+    );
+
+    // مقداری تاخیر قبل از اضافه کردن مجدد تسک به لیست
+    Future.delayed(_animationDuration, () {
+      setState(() {
+        // تسک را از لیست اصلی حذف می‌کنیم
+        _tasks.removeAt(index);
+
+        int newIndex;
+        if (isDone) {
+          // اگر تسک انجام شده، آن را به انتهای لیست اضافه کن
+          _tasks.add(task);
+          newIndex = _tasks.length - 1;
+        } else {
+          // اگر تسک از حالت انجام‌شده خارج شد، آن را قبل از اولین تسک انجام‌شده قرار بده
+          int firstCompletedTaskIndex = _tasks.indexWhere((t) => t.isDone);
+          if (firstCompletedTaskIndex != -1) {
+            _tasks.insert(firstCompletedTaskIndex, task);
+            newIndex = firstCompletedTaskIndex;
+          } else {
+            _tasks.add(task);
+            newIndex = _tasks.length - 1;
+          }
+        }
+
+        // اضافه کردن تسک به موقعیت جدید با انیمیشن
+        _listKey.currentState?.insertItem(
+          newIndex,
+          duration: _animationDuration,
+        );
+      });
+    });
+  }
+
+  // ساخت آیتم تسک برای انیمیشن
+  Widget _buildTaskItem(BuildContext context, TaskModel task, int index,
+      Animation<double> animation) {
+    return SizeTransition(
+      sizeFactor: animation,
+      child: FadeTransition(
+        opacity: animation,
+        child: SlideTransition(
+          position: Tween<Offset>(
+            begin: const Offset(0.2, 0.0),
+            end: Offset.zero,
+          ).animate(animation),
+          child: Draggable<int>(
+            data: index,
+            feedback: Material(
+              elevation: 4.0,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 60,
+                child: TaskWidget(
+                  task: task,
+                  onStatusChanged: (_) {},
+                ),
+              ),
+            ),
+            childWhenDragging: Opacity(
+              opacity: 0.5,
+              child: TaskWidget(
+                task: task,
+                onStatusChanged: (_) {},
+              ),
+            ),
+            child: DragTarget<int>(
+              onAccept: (draggedIndex) {
+                if (draggedIndex != index) {
+                  setState(() {
+                    final item = _tasks.removeAt(draggedIndex);
+                    _tasks.insert(index, item);
+
+                    // انیمیشن برای آیتم‌های جابجاشده
+                    _listKey.currentState?.setState(() {});
+                  });
+                }
+              },
+              builder: (context, candidateData, rejectedData) {
+                return AnimatedContainer(
+                  duration: Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                    border: candidateData.isNotEmpty
+                        ? Border.all(color: Colors.blue, width: 2)
+                        : null,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TaskWidget(
+                    task: task,
+                    onStatusChanged: (isDone) =>
+                        _onTaskStatusChanged(index, isDone),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,56 +264,13 @@ class _HomeScreenState extends State<HomeScreen>
               Expanded(
                 child: _tasks.isEmpty
                     ? Center(child: Text("No tasks available"))
-                    : ListView.separated(
+                    : AnimatedList(
+                        key: _listKey,
                         padding: const EdgeInsets.all(30),
-                        itemCount: _tasks.length,
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(height: 8),
-                        itemBuilder: (context, index) {
-                          return Draggable<int>(
-                            data: index,
-                            feedback: Material(
-                              elevation: 4.0,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width -
-                                    60, // 30 padding on each side
-                                child: TaskWidget(
-                                  task: _tasks[index],
-                                ),
-                              ),
-                            ),
-                            childWhenDragging: Opacity(
-                              opacity: 0.5,
-                              child: TaskWidget(
-                                task: _tasks[index],
-                              ),
-                            ),
-                            child: DragTarget<int>(
-                              onAccept: (draggedIndex) {
-                                if (draggedIndex != index) {
-                                  setState(() {
-                                    final item = _tasks.removeAt(draggedIndex);
-                                    _tasks.insert(index, item);
-                                  });
-                                }
-                              },
-                              builder: (context, candidateData, rejectedData) {
-                                return AnimatedContainer(
-                                  duration: Duration(milliseconds: 200),
-                                  decoration: BoxDecoration(
-                                    border: candidateData.isNotEmpty
-                                        ? Border.all(
-                                            color: Colors.blue, width: 2)
-                                        : null,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: TaskWidget(
-                              task: _tasks[index],
-                            ),
-                          );
-                        },
-                            ),
-                          );
+                        initialItemCount: _tasks.length,
+                        itemBuilder: (context, index, animation) {
+                          return _buildTaskItem(
+                              context, _tasks[index], index, animation);
                         },
                       ),
               ),

@@ -8,10 +8,11 @@ import 'package:intl/intl.dart';
 
 class TaskWidget extends StatefulWidget {
   final TaskModel task;
-
+  final Function(bool isDone)? onStatusChanged;
   const TaskWidget({
     super.key,
     required this.task,
+    this.onStatusChanged,
   });
 
   @override
@@ -160,6 +161,9 @@ class _TaskWidgetState extends State<TaskWidget> {
               onChanged: (value) {
                 setState(() {
                   widget.task.toggleDone();
+                  if (widget.onStatusChanged != null) {
+                    widget.onStatusChanged!(widget.task.isDone);
+                  }
                 });
               },
             ),
