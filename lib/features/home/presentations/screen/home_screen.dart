@@ -39,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen>
   final Duration _animationDuration = const Duration(milliseconds: 300);
 
   late final AnimationController _controller;
-  late final Animation<double> _animation;
 
   @override
   void initState() {
@@ -48,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _controller.forward();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -108,17 +106,6 @@ class _HomeScreenState extends State<HomeScreen>
     });
   }
 
-  void _onReorder(int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) newIndex--;
-      final task = _tasks.removeAt(oldIndex);
-      _tasks.insert(newIndex, task);
-
-      // فقط آیتم جابجا شده رو انیمیت کن
-      _controller.reset();
-      _controller.forward();
-    });
-  }
 
   // متد بهبود یافته با انیمیشن برای مدیریت تغییر وضعیت تسک‌ها
   void _onTaskStatusChanged(int index, bool isDone) {
@@ -179,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen>
             data: index,
             feedback: Material(
               elevation: 4.0,
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width - 60,
                 child: TaskWidget(
                   task: task,
